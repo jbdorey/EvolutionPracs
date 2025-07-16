@@ -1,7 +1,7 @@
 ---
 title: "Evolution prac 5 — Tips and pitfalls"
 author: Dr James B Dorey and Dr Damien Esquerré, University of Wollongong
-date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2024-08-23"
+date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2025-08-29"
 output: 
    rmarkdown::html_document:
     toc: true
@@ -55,12 +55,12 @@ setwd(RootPath)
 
 ## Working directory
 
-Below is the example path to MY ROOT directoy. **NOTE**: A common pitfall that I have seen is people including a *file* at the end of the path, such as: "*/Users/jamesdorey/Desktop/Uni/Teaching/BIOL365_971/BIOL365_pracs_2024/EPrac5**/Prac5_BIOL365.Rmd***" See how that last part in bold is actually a file with a file extension? That's not a directory (folder).
+Below is the example path to MY ROOT directoy. **NOTE**: A common pitfall that I have seen is people including a *file* at the end of the path, such as: "*/Users/jamesdorey/Desktop/Uni/Teaching/BIOL365_971/BIOL365_pracs_2025/EPrac5**/Prac5_BIOL365.Rmd***" See how that last part in bold is actually a file with a file extension? That's not a directory (folder).
 
 ```{r setRootPath, include=TRUE,  eval=FALSE}
   # Set the RootPath to Prac1 folder
   # This is the example path to MY FOLDER. 
-RootPath <- "/Users/jamesdorey/Desktop/Uni/Teaching/BIOL365_971/BIOL365_pracs_2024/EPrac5"
+RootPath <- "/Users/jamesdorey/Desktop/Uni/Teaching/BIOL365_971/BIOL365_pracs_2025/EPrac5"
   # You can then set this as the project's working directory. 
 setwd(RootPath)
 ```

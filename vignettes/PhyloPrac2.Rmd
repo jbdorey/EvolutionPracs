@@ -1,7 +1,7 @@
 ---
 title: "Evolution Prac 2 — Access genetic data from GenBank"
 author: Dr James B Dorey and Dr Damien Esquerré, University of Wollongong
-date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2024-08-02"
+date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2025-08-08"
 output: 
    rmarkdown::html_document:
     toc: true

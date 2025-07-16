@@ -1,7 +1,7 @@
 ---
 title: "Evolution Prac 1 — Getting ready!"
 author: Dr James B Dorey and Dr Damien Esquerré, University of Wollongong
-date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2024-07-26"
+date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2025-08-01"
 output: 
    rmarkdown::html_document:
     toc: true
@@ -60,7 +60,7 @@ Practicals will be run as the below practical schedule from the course handbook.
 3.  In weeks **7** and **13**, instead of a prac, we will have in-class quizzes, each worth 20% of your final grade and base on the lectures delivered previously.
 4.  In weeks **11** and **12**, you will deliver your seminars to the class, instead of undertaking a standard practical.
 
-![](Media_P1_BIOL365/PracSchedule.png)
+![](Media_P1/PracSchedule.png)
 
 # Working together
 
@@ -72,7 +72,7 @@ You won't be forming groups *per se*, but it is possible to work together on ben
 
 Because I work on bees, I might have a question about a particular bee subgenus. Say the halictid (from the family Halictidae) bee subgenus *Lasioglossum (Homalictus)*. I might come up with a hypothesis such as "*More bees in the subgenus* Homalictus *are metalic in colouration than non-metalic*". That's a simple enough question and I suspect that it's true... but these bees are found all over the place (Australia to Southern China and India)! Maybe I could narrow it down to a place where there are fewer species and lots of genetic data available. I happen to work on the Fijian *Homalictus*, so I could hypothesise that "*More FIJIAN bees in the subgenus* Homalictus *have metallic abdomens than non-metallic abdomens*" — a question about the prevalence of a state. The data to answer this question could be derived from [here](https://uowmailedu-my.sharepoint.com/:b:/g/personal/jdorey_uow_edu_au/EY-bgdariG1BmtpnuPjMHagBMtcrx9BQaxgHqgpl2bo5Aw?e=BFcQVj). You could also hypothesise that "*Homalictus* bees are more likely to move from having metallic abdomens to non-metallic abdomens than the other way around" — a question about how frequently states evolve and their direction.
 
-![Photos of various Fijian *Lasioglossum (Homalictus)* (Hymenoptera: Halictidae) bees by James Dorey](Media_P1_BIOL365/_JamesDorey_Fiji%20Homalictus%20Composition.png)
+![Photos of various Fijian *Lasioglossum (Homalictus)* (Hymenoptera: Halictidae) bees by James Dorey](Media_P1/_JamesDorey_Fiji%20Homalictus%20Composition.png)
 
 You get the idea. Now we are talking in terms of macroevolution.
 
@@ -98,17 +98,17 @@ We are not going to do much with *R* today, don't worry, but I'd like to get you
 
 ## Running *R* in *RStudio*
 
-Before we get into working in *RStudio*, let's make a folder where we will save all of our practical outputs and related files. Mine is called "*BIOL365_pracs_2024*". Notice how I have used underscores instead of spaces? This is very good practice to not have ANY spaces in your folder paths where you want to do coding stuff. Most of the time it's fine... but, **pro tip**, sometimes, it will cause problems that might be hard to track down!
+Before we get into working in *RStudio*, let's make a folder where we will save all of our practical outputs and related files. Mine is called "*BIOL365_pracs_2025*". Notice how I have used underscores instead of spaces? This is very good practice to not have ANY spaces in your folder paths where you want to do coding stuff. Most of the time it's fine... but, **pro tip**, sometimes, it will cause problems that might be hard to track down!
 
 When you open up *RStudio* for the first time, it will look a little something like the below (Fig. 2). But, without the funky colour scheme.
 
-![An empty *RStudio* page](Media_P1_BIOL365/Rsession1.png){width="600px"}
+![An empty *RStudio* page](Media_P1/Rsession1.png){width="600px"}
 
 In the top left-hand side drop down, there is a white page with a green plus sign on it. Click on that and you can then select to add a new "R Script" (Fig. 3). We can then go ahead and save this blank script in a folder for these pracs (Fig. 4). I have called this script "*MyFirstRScript.R*".
 
-![How to add a new *R* Script](Media_P1_BIOL365/CreateScript2.png){width="200px"}
+![How to add a new *R* Script](Media_P1/CreateScript2.png){width="200px"}
 
-![How to save your new *R* Script](Media_P1_BIOL365/SaveScript3.png){width="200px"}
+![How to save your new *R* Script](Media_P1/SaveScript3.png){width="200px"}
 
 It's also VERY good practice to leave some info about who made this script, why, and how they can get in touch with you! Go ahead and copy the below into your script and then personalise it with your details!
 
@@ -120,19 +120,57 @@ It's also VERY good practice to leave some info about who made this script, why,
 
 Did you notice all of the hashtags? These are comments and *R* will ignore them (Fig. 5)!
 
-![My colour scheme shows hashtags in blue, and actual code in white. Very handy.](Media_P1_BIOL365/HashtagExample4.png){width="600px"}
+![My colour scheme shows hashtags in blue, and actual code in white. Very handy.](Media_P1/HashtagExample4.png){width="600px"}
 
 ## Script preparation
 
-### Working directory
+### Working directory primer
 
-Let us begin by telling *R* where our working directory (the folder that you made above) actually is. My "*BIOL365_pracs_2024*" folder is found at the end of the path:
+I know that many of you struggle with the concept of **working directories** and I think that they are important enough, as some of you have pointed out — thank you :), to describe in some detail. Just like some of the content that we cover in Conservation Biology (e.g., think about macroecology), the name sounds much scarier than the reality and accepting that will hopefully help you master these concepts. *(Upon reflection, this may be a poor example for many.)* Similarly **working directories** are actually quite simple! One way to look at a working directory is to think of them as a breadcrumb trail from the **root directory** where all of your computer's files are stored directly to your working file (**working directory**) that contains your **R** project, code, files, etc.
 
-"*/Users/jamesdorey/Desktop/Uni/Teaching/BIOL365_971/BIOL365_pracs_2024/Prac1/*" (see again, no spaces!). So, I can run the below:
+You could imagine that your **root directory** is your closet (e.g., `/` on Mac/Linux and `C:\` on Windows). Within your closet you may have shelves, hangers, shoe racks, *no, don't look at the skeletons*, a laundry basket, etc. These are all things that you might use to keep your closet nice, tidy, and organised — **these are your folders**. Within your drawers you may also have further compartments which you could also consider **folders** and, in this way, you closet is a hierarchical system containing smaller and smaller storage units (**folders**). Each of these units may contain further units (**folders**), and each of these may also contain items like shirts, jewelry, shoes... To take our figure example below the item "Shirt" is clothing; this tells us about the use of the item. In the same way, file extensions (e.g., `file.extension`) tells the computer what a file is and how to open it! You are likely very used to these things like images (`.jpg`, `.tiff`, `.png`), text files (`.docx`, `.txt`, `.r`), or data files (`.csv`, `.xlsx`, `.rda`). Hence, we might say `Shirt.cloth`!
+
+These items are the **files**, just like your `.r` file that holds the text of your code! 
+
+![**If we imagine that the closet is our computer and each box is a file, to find the file path from the bag (orange) to the computer, we would write our breadcrumb as `/Closet/Box2/Shirt.cloth`.**](Media_P1/filePathAnalogy.jpg)
+
+This is essentially what your computer looks like!
+
+> What about cloud storage like *OneDrive* or *GoogleDrive*? Well, imagine that you keep all of your stuff in Elon Musk's closet and say "Let me keep all of my stuff in your closet and use it whenever I want, because my closet is just a matchbox". And then you trust all of your stuff to Elon and hope that he doesn't cut it, lose it, or sell it to someone else. This is probably fine, but you often rely on internet access to be able to use stuff in your closet.
+
+Each time that you start an **R** project, you make a decision about where to store this in your closet. Maybe you store it somewhere very hidden, or maybe it's the first thing there when you open the door (near the **root directory**). Every time that you want to access that project, and the associated items (**files**), you might decide that you need to search the closet to find everything (*and trust me, finding that anything in your closet that you used two years ago is not easy!!*). This is what you do when you choose your directory from the **Files** tab in RStudio. It's a headache.
+
+Alternatively, imagine that when you next wanted to find everything associated with your project you just had to find the .r code file and at the very top there was a magical string attached to you **working directory** and every item that you needed needed for your project. This is what we are doing below.
+
+
+<div class="alert alert-info">
+  <strong> Attention:</strong> <br>
+Windows gives file paths in a different way than everyone else. :( 
+
+  <strong> Windows:</strong> <br>
+  On **Windows**, to find your file paths, right click on a file or folder and select "Properties". Then, you can copy the file "Location". But, you will need to change all of the backslashes (`\`) into forward slashes (`/`). For example:
+  
+      "D:\Users\jamesdorey\..." 
+Becomes...
+
+      "D:/Users/jamesdorey/..."
+  
+
+  <strong> MacOS:</strong> <br>
+  On Mac or Linux, this is much easier. Using a Mac, you can right-click on a file and hold the "option" key to `Copy "file/folder" as Pathname`. Simply paste this into R and you will get something like the below automatically:
+  
+    '/Users/jamesdorey/...'
+
+</div>
+
+### Setting the working directory
+Let us begin by telling *R* where our working directory (the folder that you made above) actually is. My "*BIOL365_pracs_2025*" folder is found at the end of the path:
+
+"*/Users/jamesdorey/Desktop/Uni/Teaching/BIOL365_971/BIOL365_pracs_2025/Prac1/*" (see again, no spaces!). So, I can run the below:
 
 ```{r setRootPath, include=TRUE,  eval=FALSE}
   # Set the RootPath to your folder
-RootPath <- "/Users/jamesdorey/Desktop/Uni/Teaching/BIOL365_971/BIOL365_pracs_2024/Prac1/BIOL365_pracs_2024"
+RootPath <- "/Users/jamesdorey/Desktop/Uni/Teaching/BIOL365_971/BIOL365_pracs_2025/Prac1/BIOL365_pracs_2025"
   # You can then set this as the project's working directory. 
   # This is where R will first look to find 
   # or save data as a default
@@ -173,4 +211,4 @@ Next week, we will be downloading data from GenBank using a web browser and then
 
 # Packages used today
 
-![](Media_P1_BIOL365/dplyr.png){width="200px"} ![](Media_P1_BIOL365/magrittr.png){width="200px"}
+![](Media_P1/dplyr.png){width="200px"} ![](Media_P1/magrittr.png){width="200px"}
