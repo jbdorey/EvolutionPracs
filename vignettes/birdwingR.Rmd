@@ -1,0 +1,645 @@
+---
+output: 
+   rmarkdown::html_document:
+editor_options: 
+  markdown: 
+    wrap: 80
+always_allow_html: true
+
+vignette: >
+  %\VignetteIndexEntry{BeeBDC}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+# Load packages
+
+Use a temporary working directory 
+
+```{r setWD, include=TRUE, message = FALSE}
+setwd(tempdir())
+library(magrittr)
+library(BeeBDC)
+library(dplyr)
+library(bdc)
+```
+
+# Prepare data 
+
+```{r hiddenBeeBDCFunctionUpdate, include=FALSE}
+
+interactiveMapR <- function(
+      # occurrence data
+    data = NULL,
+      # Directory where to save files
+    outPath = NULL,
+      # lat long columns
+    lon = "decimalLongitude",
+    lat = "decimalLatitude",
+      # Occurrence dataset column with species names
+    speciesColumn = "scientificName",
+      # Which species to map - a character vector of names or "ALL"
+    speciesList = NULL,
+    countryList = NULL,
+    jitterValue = NULL,
+    onlySummary = TRUE,
+    overWrite = TRUE,
+    TrueAlwaysTop = FALSE,
+    excludeApis_mellifera = TRUE,
+    pointColours = c("blue", "darkred","#ff7f00", "black"),
+    returnPlot = FALSE
+    ){
+  # locally bind variables to the function
+  country <- .data <- scientificName <- expertOutlier <- .countryOutlier <- .summary <-
+    providers <- databaseSpp <- .expertOutlier <- NULL
+    
+  
+  requireNamespace("htmlwidgets")
+  requireNamespace("leaflet")
+  requireNamespace("dplyr")
+  
+  # Ensure that working directories are maintain on exit from function
+  oldwd <- getwd()           # code line i 
+  on.exit(setwd(oldwd))        # code line i+1 
+  
+  
+#### 0.0 Prep ####
+  ##### 0.1 Errors ####
+  ###### a. FATAL errors ####
+  if(is.null(data)){
+    stop(paste0(" - No data was given. Please specify the data that you want to map ",
+                "for your data-cleaning adventures. I'll do the rest."))
+  }
+  if(is.null(outPath)){
+    stop(paste0(" - No outPath was given. Please specify the directory to save the maps to."))
+  }
+  
+  ##### 0.2 Packages ####
+  # Save the original directory 
+  olddir <- getwd()
+  
+
+  ##### 0.3 Directories ####
+  # Create directory if it does not exist
+if (!dir.exists(outPath)) {
+  dir.create(outPath, recursive = TRUE)}
+  # Set directory
+setwd(outPath) #directory of work
+
+  # data$IDall <- paste0(1:nrow(data)) #to add an ID by row
+
+  
+
+##### 0.4 leaflet test ####
+###### a. test ####
+# Check if leaflet is installed
+# TRUE if leaflet is found
+suppressWarnings(
+  suggestedTest <- system.file(package='leaflet') %>% 
+    stringr::str_count() > 0 
+)
+
+###### b. leaflet ####
+if(suggestedTest == FALSE){
+  # Set up instructions for download on fail
+  instructions <- paste(" Please try installing the package for yourself", 
+                        "using the following command: \n",
+                        "install.packages(\"leaflet\")")
+  # Set up fail function for tryCatch
+  error_func <- function(e){
+    stop(paste("Failed to install the leaflet package.\n", 
+               instructions))
+  }
+  # Begin interactive input
+  input <- 1
+  if (interactive()){
+    input <- utils::menu(c("Yes", "No"), 
+                         title = paste0("Install the leaflet package? \n"))
+  }
+  if(input == 1){
+    # Start leaflet install
+    message("Installing the leaflet package.")
+    tryCatch(
+      utils::install.packages("leaflet"), 
+      error = error_func, warning = error_func)
+  } # END input == 1
+  
+  else{
+    stop(writeLines(paste("The leaflet package is necessary for BeeBDC::interactiveMapR.\n", 
+                          instructions)))
+  } # END else
+} # END suggestedTest == FALSE
+
+
+  #### 1.0 Data prep ####
+    ##### 1.1 Remove na+ ####
+data <- data %>%
+  tidyr::drop_na(tidyselect::any_of(c(lon, lat)))  %>%
+    # Rename the lat and lon to darwincore
+  dplyr::rename("decimalLongitude" = tidyselect::all_of(lon),
+                "decimalLatitude" = tidyselect::all_of(lat) )
+
+# Stop if no lat/lon
+if(nrow(data) == 0){
+  stop("It looks like there may be no lat and lon data. Check that it exists and is not NA.")
+}
+
+# If there is no .expertOutlier then add one as all NA
+if(!".expertOutlier" %in% colnames(data)){
+  message("The column .expertOutlier was not found. One will be created with all values = TRUE.")
+  data <- data %>% 
+    dplyr::mutate(.expertOutlier = TRUE)
+}
+
+##### 1.2 Country list ####
+# Select only the countries user provides
+if(!is.null(countryList)){
+  data <- data %>%
+    dplyr::filter(country %in% countryList)
+}
+
+    ##### 1.3 Species list ####
+if(any(stringr::str_detect(speciesList, "ALL")) == FALSE){
+# Prepare the data for the loop
+  data <- data %>% 
+  # Select ONLY the species requested
+  dplyr::filter(.data[[speciesColumn]] %in% speciesList)
+}else{
+  speciesList <- unique(data[[speciesColumn]])
+} # END if else statement
+
+
+##### 1.4 excludeApis_mellifera ####
+if(excludeApis_mellifera == TRUE){
+  data <- data %>%
+    dplyr::filter(!scientificName == "Apis mellifera Linnaeus, 1758")
+  speciesList <- setdiff(speciesList, "Apis mellifera Linnaeus, 1758")
+}
+
+
+##### 1.5 Overwrite ####
+if(overWrite == FALSE){
+    # Find completed species
+  existingFiles <- list.files(path = outPath) %>%
+    stringr::str_remove("\\.html")
+    # remove them from the to-do list
+  speciesList <- setdiff(speciesList, existingFiles)
+    # STOP if no maps will be produced
+  if(length(speciesList) == 0){
+    stop("With overWrite = FALSE, there are no new maps to produce.")
+  }
+    # Re-filter the data to use only wanted species
+  data <- data %>% 
+    # Select ONLY the species requested
+    dplyr::filter(.data[[speciesColumn]] %in% speciesList)
+}
+
+    ##### 1.6 Jitter ####
+  # If the user specifies a jitter value, add that calue
+if(!is.null(jitterValue)){
+  data <- data %>%
+    dplyr::mutate(
+      decimalLongitude = base::jitter(data[[lon]], amount = jitterValue),
+      decimalLatitude = base::jitter(data[[lat]], amount = jitterValue)
+    )
+}else{
+    # If no jitter, ensure that the lat lon columns are the same
+  data <- data %>%
+    dplyr::mutate(
+      decimalLongitude = data[[lon]],
+      decimalLatitude = data[[lat]])
+} # END Jitter
+
+
+  # Make a new column to colour by if onlySummary == FALSE
+if(onlySummary == FALSE){
+  data <- data %>% 
+    dplyr::mutate(mapLevels = dplyr::if_else(.expertOutlier == FALSE,
+                                             "expertOutlier",
+                    dplyr::if_else(.countryOutlier == FALSE | is.na(.countryOutlier),
+      "countryOutlier", dplyr::if_else(.summary == FALSE,
+                                       "FALSE", "TRUE"))) %>%
+        factor(c("TRUE", "FALSE", "countryOutlier", "expertOutlier"), 
+               levels = c("TRUE", "FALSE", "countryOutlier", "expertOutlier"), 
+               ordered = TRUE)
+      )
+  colPal = leaflet::colorFactor(pointColours, 
+                             levels = c("TRUE", "FALSE",
+                                        "countryOutlier", "expertOutlier"))
+  
+}else{ # Make colour palette for == TRUE
+    # Only take the first two, if more are provided
+  pointColours <- pointColours[1:2]
+  colPal = leaflet::colorFactor(pointColours, 
+                             levels = c("TRUE", "FALSE"))
+}
+  
+
+
+# ensure UTF-8 encoding
+old <- options()         # code line i 
+on.exit(options(old))      # code line i+1 
+
+# Ensure that there are no NA entries in the species list
+speciesList <- speciesList[complete.cases(speciesList)]
+
+options(encoding = "UTF-8")
+
+data <- data %>% dplyr::mutate(dplyr::across(tidyselect::where(is.character), 
+                              function(x){iconv(x, 
+                                                to = "UTF-8",
+                                                sub = "")}))
+
+#### 2.0 produce maps ####
+#function for leaflet maps
+for (x in 1:length(speciesList)){
+    # Filter to the xth species
+  databaseLoop <- data %>% 
+    dplyr::filter(.data[[speciesColumn]] == speciesList[[x]] %>% iconv(x,
+                                                                       from = "UTF-8",
+                                                                       to = "UTF-8",
+                                                                       sub = ""))
+    # Split data into classes
+  if(onlySummary == FALSE){
+    databaseLoop <- split(databaseLoop, f= databaseLoop$mapLevels, drop = TRUE)
+  }else{
+  databaseLoop <- split(databaseLoop, databaseLoop$.summary)}
+                                    #here you can change the number of spp
+  
+  # Make the base map
+  mdatabaseSpp <- leaflet::leaflet(data = databaseLoop ) %>% 
+      # Add map panes
+    leaflet::addMapPane(name = "maplabels_FALSE", zIndex = 410) %>% 
+    leaflet::addMapPane(name = "maplabels_TRUE", zIndex = 420) %>% # higher zIndex rendered on top
+    leaflet::addMapPane(name = "maplabels_default", zIndex = 600) %>%
+    # Base groups
+    leaflet::addTiles(group = "OSM (default)") %>%
+    leaflet::addProviderTiles("Stadia.StamenTonerLite", group = "Toner Lite",
+                              layerId = 300,
+                              options = leaflet::providerTileOptions(zIndex = 500))
+    # For the names in the list, apply the points function
+      # Apply each walkName in a for loop to add to the map.
+for(i in 1:length(names(databaseLoop))){
+  walkName <- names(databaseLoop)[[i]]
+  databaseSpp <- databaseLoop[[walkName]]
+  mdatabaseSpp <- databaseLoop[[walkName]] %>%
+    leaflet::addCircleMarkers(map = mdatabaseSpp,
+                              data = databaseSpp,
+                              lng = ~decimalLongitude, lat = ~decimalLatitude, ###then you can specify what do you want in the popup window from your data
+                              group = walkName,
+                             if(TrueAlwaysTop == TRUE){
+                             options = leaflet::leafletOptions(
+                               pane = if(walkName == "TRUE"){"maplabels_TRUE"
+                                 }else{"maplabels_FALSE"})}else{
+                                   options = leaflet::leafletOptions(
+                                     pane = "maplabels_default")
+                                 },
+                              popup = stringr::str_c(
+                                sep = "",
+                                ###### a. basic data ####
+                                "<b>Basic data </b> - ",
+                                "ID: ", databaseSpp$database_id, " ", #databaseSpp is the name of data and ID the name of the column
+                                if("family" %in% colnames(databaseSpp)){
+                                  paste0("Family: ", databaseSpp$family, 
+                                         ";   ")},
+                                if("scientificName" %in% colnames(databaseSpp)){
+                                  paste0("Species: ", databaseSpp$scientificName, 
+                                         ";   ")},
+                                            if("institutionCode" %in% colnames(databaseSpp)){
+                                                           paste0(" institutionCode: ", databaseSpp$institutionCode, 
+                                                          ";   ")},
+                                            if("catalogNumber" %in% colnames(databaseSpp)){
+                                                           paste0("catalogNumber: ", databaseSpp$catalogNumber, 
+                                                                  ";   ")},
+                                            if("verbatimScientificName" %in% colnames(databaseSpp)){
+                                                           paste0("Original name: ", databaseSpp$verbatimScientificName, 
+                                                                  ";   ")},
+                                            if("scientificNameAuthorship" %in% colnames(databaseSpp)){
+                                                           paste0("Authority: ", databaseSpp$scientificNameAuthorship, 
+                                                                  ";   ")},
+                                ###### b. summary data ####
+                                if(".summary" %in% colnames(databaseSpp)){
+                                  paste0("<p></p> <b>Summary flag</b> - ", databaseSpp$.summary)},
+                                ###### c. initial data ####
+                                "<p></p><b>Initial flags</b> - ",
+                                            if(".coordinates_empty" %in% colnames(databaseSpp)){
+                                                           paste0("No coordinates: ", databaseSpp$.coordinates_empty, 
+                                                                  ";   ")},
+                                            if(".coordinates_outOfRange" %in% colnames(databaseSpp)){
+                                                           paste0("Point off map: ", databaseSpp$.coordinates_outOfRange, 
+                                                                  ";   ")},
+                                            if(".basisOfRecords_notStandard" %in% colnames(databaseSpp)){
+                                                           paste0("Excluded basis of record: ", databaseSpp$.basisOfRecords_notStandard, 
+                                                                  ";   ")},
+                                            if(".coordinates_country_inconsistent" %in% colnames(databaseSpp)){
+                                                           paste0("Coords. & country inconsistent: ", databaseSpp$.coordinates_country_inconsistent, 
+                                                                  ";   ")},
+                                            if(".occurrenceAbsent" %in% colnames(databaseSpp)){
+                                                           paste0("Absent record: ", databaseSpp$.occurrenceAbsent, 
+                                                                  ";   ")},
+                                            if(".unLicensed" %in% colnames(databaseSpp)){
+                                                           paste0("Protected by license: ", databaseSpp$.unLicensed, 
+                                                                  ";   ")},
+                                ###### d. taxonomy data ####
+                                              # Taxonomy
+                                "<p></p><b>Taxonomy flags</b> - ",
+                                            if(".scientificName_empty" %in% colnames(databaseSpp)){
+                                                           paste0("No scientific name: ", databaseSpp$.scientificName_empty, 
+                                                                  ";   ")},
+                                            if(".invalidName" %in% colnames(databaseSpp)){
+                                                           paste0("Name didn't match: ", databaseSpp$.invalidName, 
+                                                                  ";   ")},
+                                            if(".uncer_terms" %in% colnames(databaseSpp)){
+                                                           paste0("Taxonomy qualifier: ", databaseSpp$.uncer_terms, 
+                                                                  ";   ")},
+                                ###### e. space data ####
+                                              # space
+                                "<p></p><b>Space flags</b> - ",
+                                            if(".rou" %in% colnames(databaseSpp)){
+                                                           paste0("Coordinates rounded: ", databaseSpp$.rou, 
+                                                                  ";   ")},
+                                            if(".uncertaintyThreshold" %in% colnames(databaseSpp)){
+                                              paste0("High coordinate uncertainty: ", databaseSpp$.uncertaintyThreshold, 
+                                                     ";   ")},
+                                            if(".cap" %in% colnames(databaseSpp)){
+                                             paste0("Capital centroid: ", databaseSpp$.cap, 
+                                                    ";   ")},
+                                            if(".cen" %in% colnames(databaseSpp)){
+                                                           paste0("Country centroid: ", databaseSpp$.cen, 
+                                                                  ";   ")},
+                                            if(".gbf" %in% colnames(databaseSpp)){
+                                                           paste0("Point on GBIF HQ: ", databaseSpp$.gbf, 
+                                                                  ";   ")},
+                                            if(".equ" %in% colnames(databaseSpp)){
+                                                           paste0("Coordinates equal: ", databaseSpp$.equ, 
+                                                                  ";   ")},
+                                            if(".inst" %in% colnames(databaseSpp)){
+                                                           paste0("Point on institution: ", databaseSpp$.inst, 
+                                                                  ";   ")},
+                                            if(".zer" %in% colnames(databaseSpp)){
+                                                           paste0("Coordinates zero: ", databaseSpp$.zer, 
+                                                                  ";   ")},
+                                            if(".val" %in% colnames(databaseSpp)){
+                                                           paste0("Coordinates zero: ", databaseSpp$.val, 
+                                                                  ";   ")},
+                                           if(".sea" %in% colnames(databaseSpp)){
+                                             paste0("In sea: ", databaseSpp$.sea, 
+                                                    ";   ")},
+                                           
+                                            if(".countryOutlier" %in% colnames(databaseSpp)){
+                                                           paste0("Country outliers: ", databaseSpp$.countryOutlier, 
+                                                                  ";   ")},
+                                            if(".stateOutlier" %in% colnames(databaseSpp)){
+                                              paste0("State outliers: ", databaseSpp$.stateOutlier, 
+                                                     ";   ")},
+                                           if(".expertOutlier" %in% colnames(databaseSpp)){
+                                             paste0("Expert-identified outliers: ", databaseSpp$.expertOutlier, 
+                                                    ";   ")},
+                                            if(".sequential" %in% colnames(databaseSpp)){
+                                                           paste0("Coordinate fill-down: ", databaseSpp$.sequential, 
+                                                                  ";   ")},
+                                            if(".latFlag" %in% colnames(databaseSpp)){
+                                                           paste0("Gridded latitudes: ", databaseSpp$.latFlag, 
+                                                                  ";   ")},
+                                            if(".lonFlag" %in% colnames(databaseSpp)){
+                                                           paste0("Gridded latitudes: ", databaseSpp$.lonFlag, 
+                                                                  ";   ")},
+                                            if(".gridSummary" %in% colnames(databaseSpp)){
+                                                           paste0("Gridded lat & lon: ", databaseSpp$.gridSummary, 
+                                                                  ";   ")},
+                                ###### f. time data ####
+                                            # Time
+                                "<p></p><b>Time flags</b> - ",
+                                            if(".eventDate_empty" %in% colnames(databaseSpp)){
+                                                           paste0("No event date: ", databaseSpp$.eventDate_empty, 
+                                                                  ";   ")},
+                                            if(".year_outOfRange" %in% colnames(databaseSpp)){
+                                                           paste0("Year out of range: ", databaseSpp$.year_outOfRange, 
+                                                                  ";   ")},
+                                ###### g. duplicate data ####
+                                            # Duplicate
+                                if(".duplicates" %in% colnames(databaseSpp)){
+                                               paste0("<p></p><b>Duplicate flag</b> - ", databaseSpp$.duplicates,
+                                                      ";   ")},
+                                ###### h. collection data ####
+                                # Time
+                                "<p></p><b>Collection data</b> - ",
+                                if("recordedBy" %in% colnames(databaseSpp)){
+                                  paste0("Collector(s): ", databaseSpp$recordedBy, 
+                                         ";   ")},
+                                if("year" %in% colnames(databaseSpp)){
+                                  paste0("Year: ", databaseSpp$year, 
+                                         ";   ")},
+                                if("identifiedBy" %in% colnames(databaseSpp)){
+                                  paste0("Identified by: ", databaseSpp$identifiedBy, 
+                                         ";   ")},
+                                if("country" %in% colnames(databaseSpp)){
+                                  paste0("Country: ", databaseSpp$country, 
+                                         ";   ")},
+                                if("references" %in% colnames(databaseSpp)){
+                                  paste0("References: ", databaseSpp$references, 
+                                         "   ")}
+   
+                                
+                                            ), #you can add what do you want from columns of your data
+                    
+                  ###### i. colour ####
+                              fillOpacity = if(walkName %in% c("TRUE", "FALSE")){0.4}else{0.7},
+                              opacity = if(walkName %in% c("TRUE", "FALSE")){0.65}else{1},
+                              #opacity =  if(walkName %in% c("TRUE", "FALSE")){0.25}else{1},
+                              #stroke =  if(walkName %in% c("TRUE", "FALSE")){TRUE}else{FALSE},
+
+                  # colour determined by if else
+                              fillColor = 
+                                if(onlySummary == FALSE){
+                                  colPal(databaseSpp$mapLevels)
+                                }else{colPal(databaseSpp$.summary)},
+                              # Stroke color
+                              color = if(walkName %in% c("TRUE", "FALSE")){
+                                colPal(databaseSpp$.summary)}else{
+                                  # colour TRUE border
+                                if(all(databaseSpp$.summary) == TRUE){
+                                  pointColours[1]
+                              }else{pointColours[2]}},
+                                # Internal size
+                             radius = if(walkName %in% c("TRUE", "FALSE")){
+                               5}else{6},
+                                # border size
+                             weight = if(walkName %in% c("TRUE", "FALSE")){
+                               1.5}else{2.5}) #to change the size of points  
+    } # END for loop
+
+    
+  ###### j. controller ####
+    # Add the layers control
+    mdatabaseSpp <- mdatabaseSpp %>%
+      leaflet::addLegend(color = pointColours[length(names(databaseLoop)):1],
+                labels = names(databaseLoop), 
+                group = names(databaseLoop)) %>%
+    leaflet::addLayersControl(
+      baseGroups = c("OSM (default)", "Toner Lite"),
+      overlayGroups = names(databaseLoop),
+      options = leaflet::layersControlOptions(collapsed = FALSE, autoZIndex = FALSE,
+                                     sortLayers = FALSE))
+
+  ###### k. save ####
+  #then, it is to save in html format
+  htmlwidgets::saveWidget(plotly::as_widget(mdatabaseSpp), 
+                          file.path(outPath, #directory to save files
+                                    paste0(speciesList[[x]],".html")),
+                          selfcontained = TRUE,
+                          title = paste0(speciesList[[x]]))
+} # END for
+
+# reset to original directory
+setwd(olddir)
+
+if(returnPlot == TRUE){
+return(mdatabaseSpp)
+}
+
+} # END function
+
+
+```
+
+
+Access stored and downloaded data 
+
+```{r downloadData, include=TRUE, message = FALSE}
+  # Download data
+utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/BIOL361_25/main/vignettes/records-2025-02-20/records-2025-02-20.csv",
+                     destfile = "records-2025-02-20.csv",
+                     method="curl")
+```
+
+Read in the data and apply some filtering 
+
+```{r InitialFlags, include=TRUE, message = FALSE, warning = FALSE}
+
+# Read data and run initial flags
+RichmondBirdwingData <- readr::read_csv("records-2025-02-20/records-2025-02-20.csv",
+                                        col_types = BeeBDC::ColTypeR()) %>%
+  dplyr::mutate(database_id = paste0("RBB_", 1:nrow(.)),
+                .before = scientificName) %>% 
+  bdc::bdc_scientificName_empty(data = ., sci_name = "scientificName") %>%
+  bdc::bdc_coordinates_empty(data = ., lat = "decimalLatitude",
+                             lon = "decimalLongitude") %>%
+  bdc::bdc_coordinates_outOfRange(data = ., lat = "decimalLatitude",
+                                  lon = "decimalLongitude") %>%
+  bdc::bdc_basisOfRecords_notStandard(
+    data = .,
+    basisOfRecord = "basisOfRecord",
+    names_to_keep = c(
+      # Keep all plus some at the bottom.
+      "Event",
+      "HUMAN_OBSERVATION",
+      "HumanObservation",
+      "LIVING_SPECIMEN",
+      "LivingSpecimen",
+      "MACHINE_OBSERVATION",
+      "MachineObservation",
+      "MATERIAL_SAMPLE",
+      "O",
+      "Occurrence",
+      "MaterialSample",
+      "OBSERVATION",
+      "Preserved Specimen",
+      "PRESERVED_SPECIMEN",
+      "preservedspecimen Specimen",
+      "Preservedspecimen",
+      "PreservedSpecimen",
+      "preservedspecimen",
+      "S",
+      "Specimen",
+      "Taxon",
+      "UNKNOWN",
+      "",
+      NA,
+      "NA",
+      "LITERATURE", 
+      "None", "Pinned Specimen", "Voucher reared", "Emerged specimen"
+    )) %>% 
+  BeeBDC::flagAbsent(data = ., PresAbs = "occurrenceStatus") %>%
+  BeeBDC::flagLicense(data = .,
+                      strings_to_restrict = "all",
+                      # DON'T flag if in the following dataSource(s)
+                      excludeDataSource = NULL) %>%
+  BeeBDC::summaryFun(
+    data = .,
+    # Don't filter these columns (or NULL)
+    dontFilterThese = NULL,
+    # Remove the filtering columns?
+    removeFilterColumns = FALSE,
+    # Filter to ONLY cleaned data?
+    filterClean = FALSE)
+
+  # Space
+RichmondBirdwingData <- RichmondBirdwingData %>%
+  BeeBDC::jbd_coordinates_precision(data = ., lon = "decimalLongitude",
+                                    lat = "decimalLatitude", ndec = 2  # number of decimals to be tested
+  ) %>%
+  BeeBDC::coordUncerFlagR(data = ., uncerColumn = "coordinateUncertaintyInMeters",
+                          threshold = 1000) %>%
+  BeeBDC::dupeSummary(
+    data = .,
+    path = tempdir(),
+    # options are "ID","collectionInfo", or "both"
+    duplicatedBy = "collectionInfo", 
+    # The columns to generate completeness info from (and to sort by completness)
+    completeness_cols = c("decimalLatitude",  "decimalLongitude",
+                          "scientificName", "eventDate"),
+    # The columns to ADDITIONALLY consider when finding duplicates in collectionInfo
+    collectionCols = c("decimalLatitude", "decimalLongitude", "scientificName", "eventDate", 
+                       "recordedBy"),
+    # The columns to combine, one-by-one with the collectionCols
+    collectInfoColumns = c("catalogNumber", "otherCatalogNumbers"),
+    # Custom comparisons — as a list of columns to compare
+    # RAW custom comparisons do not use the character and number thresholds
+    CustomComparisonsRAW = dplyr::lst(c("catalogNumber", "institutionCode", "scientificName")),
+    # Other custom comparisons use the character and number thresholds
+    CustomComparisons = dplyr::lst(
+                                   c("occurrenceID", "scientificName")),
+    # The order in which you want to KEEP duplicated based on data source
+    # try unique(check_time$dataSource)
+    sourceOrder = c("CAES", "Gai", "Ecd","BMont", "BMin", "EPEL", "ASP", "KP", "EcoS", "EaCO",
+                    "FSCA", "Bal", "SMC", "Lic", "Arm",
+                    "USGS", "ALA", "VicWam", "GBIF","SCAN","iDigBio"),
+    # Paige ordering is done using the database_id prefix, not the dataSource prefix.
+    prefixOrder = c("Paige", "Dorey"),
+    # Set the complexity threshold for id letter and number length
+    # minimum number of characters when WITH the numberThreshold
+    characterThreshold = 2,
+    # minimum number of numbers when WITH the characterThreshold
+    numberThreshold = 3,
+    # Minimum number of numbers WITHOUT any characters
+    numberOnlyThreshold = 5
+  ) %>% # END dupeSummary
+  dplyr::as_tibble(col_types = BeeBDC::ColTypeR()) %>% 
+  BeeBDC::summaryFun(data = ., dontFilterThese = NULL, removeFilterColumns = FALSE,
+                     filterClean = FALSE) 
+
+table(RichmondBirdwingData$scientificName)
+```
+
+# Make interactive maps 
+
+Output the interactive map using a modified functino from BeeBDC
+
+```{r MapOut}
+RichmondBirdwingData %>% 
+  interactiveMapR(outPath = getwd(),
+                  speciesList = "ALL",
+                  returnPlot = TRUE)
+```
+
+
+```{r QLDmap }
+  # Make a map where the QLD points are all red
+RichmondBirdwingData %>%
+  dplyr::mutate(.summary = dplyr::if_else(stateProvince == "Queensland", FALSE, TRUE)) %>% 
+  BeeBDC::interactiveMapR(outPath = getwd(),
+                          speciesList = "ALL")
+
+
+
+```

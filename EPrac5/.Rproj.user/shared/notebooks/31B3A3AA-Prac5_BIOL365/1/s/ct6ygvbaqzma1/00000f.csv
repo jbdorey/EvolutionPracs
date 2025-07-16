@@ -1,0 +1,26 @@
+"0","CRAN_packageList <- c(
+    # Tidyverse packages:
+  ""dplyr"",
+  ""magrittr"", # This package is critical if R says that it can't find the function ""%>%""
+  ""tibble"",            #  A lovely table format package
+  ""tidyr"",             # Another data maniupulation package from the tidyverse
+  ""stringr"",           #  to manipulate text strings
+  ""readxl"",  # Lets you read in excel files
+    # GENETICS packages on CRAN
+  ""rentrez"",
+  ""ape"",
+  ""msaR"",
+  ""phangorn"",
+  ""phytools"",
+  ""corHMM"",
+    # General R package to help with phytools
+  ""plotrix"",
+    # General R package to help with BeeBDC
+  ""taxadb"",
+    # This package gives you access to ""bioconductor"" packages
+  ""BiocManager"",
+)
+"
+"2","Error in c(""dplyr"", ""magrittr"", ""tibble"", ""tidyr"", ""stringr"", ""readxl"",  : 
+  argument 16 is empty
+"

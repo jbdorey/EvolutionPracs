@@ -1,0 +1,26 @@
+url: https://jbdorey.github.io/BIOL361_25/
+title: "BIOL361"
+template:
+  bootstrap: 5
+  bootswatch: minty
+  math-rendering: mathjax
+  light-switch: true
+  assets: assets
+development:
+  mode: auto
+navbar:
+  left:
+    - icon: fa-home
+      href: index.html
+      aria-label: Go to package home
+    - icon: fas fa-book
+      text: "Articles"
+      aria-label: Available pages
+      menu:
+      -  text: Prac 1 — R and tidyverse basics
+         href: articles/Prac1_BIOL361.html
+      -  text: Prac 2 — GIS in R
+         href: articles/Prac2_BIOL361.html
+      -  text: Birdwing map
+         href: articles/birdwingR.html
+

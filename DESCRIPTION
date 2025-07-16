@@ -1,0 +1,58 @@
+Package: BIOL361
+Title: Conservation Biology
+Version: 1.0
+Authors@R: c(
+    person("James B.", "Dorey", , "jbdorey@me.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0003-2721-3842"))
+  )
+Description: Conservation Biology at the University of Wollongong
+License: GPL (>= 3)
+URL: https://jbdorey.github.io/BIOL361_25/
+Depends: 
+    R (>= 2.10)
+Imports: 
+    dplyr,
+    ggplot2,
+    ggspatial,
+    readr,
+    rnaturalearth,
+    sf,
+    stringr,
+    tidyselect
+Suggests: 
+    formatR,
+    htmltools,
+    htmlwidgets,
+    httr,
+    knitr,
+    leaflet,
+    magrittr,
+    pkgdown,
+    plotly,
+    prettydoc,
+    styler,
+    kableExtra,
+    geodata,
+    tidyterra,
+    BeeBDC,
+    bdc,
+    purrr,
+    R.utils,
+    rgnparser,
+    rmarkdown,
+    rmdformats,
+    rnaturalearthdata,
+    terra,
+    testthat,
+    tidyr,
+    utils,
+    xml2
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-gb
+LazyData: TRUE
+LazyDataCompression: xz
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

@@ -1,0 +1,5 @@
+"0","# We can read this fasta in as a Biostrings object
+equalised_BioString <- Biostrings::readDNAStringSet(""equalisedFasta.fasta"")
+"
+"2","Error in loadNamespace(x) : there is no package called ‘Biostrings’
+"
