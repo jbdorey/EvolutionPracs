@@ -20,6 +20,7 @@ Imports:
     msa,
     Biostrings,
     msaR,
+    readxl,
     BiocManager,
     stringr,
     tidyselect
@@ -43,7 +44,6 @@ Suggests:
     rgnparser,
     rmarkdown,
     rmdformats,
-    terra,
     testthat,
     tidyr,
     utils,
