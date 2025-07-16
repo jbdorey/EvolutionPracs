@@ -16,19 +16,19 @@ editor_options:
 <!-- badges: end -->
 
 ```{r websiteSetUp, eval = FALSE, include=FALSE}
-setwd("/Users/jamesdorey/Desktop/Uni/Teaching/EvolutionPracs")
+setwd("/Users/jamesdorey/Desktop/Uni/Teaching/EvolutionPrac")
 
   # Setup github pages 
   # See https://happygitwithr.com/common-remote-setups.html 
   # AND see https://pkgdown.r-lib.org/index.html
 # Do this only once
-# usethis::use_git("jbdorey/EvolutionPracs")
+# usethis::use_git("jbdorey/EvolutionPrac")
   
 # Run once to configure your package to use and deploy pkgdown
 # usethis::use_pkgdown_github_pages()
 
 # Preview your site locally before publishing
-pkgdown::build_site(pkg = "/Users/jamesdorey/Desktop/Uni/Teaching/EvolutionPracs",
+pkgdown::build_site(pkg = "/Users/jamesdorey/Desktop/Uni/Teaching/EvolutionPrac",
                     devel = FALSE)
 usethis::use_github_action("pkgdown")
 usethis::use_git_remote("origin", url = NULL, overwrite = TRUE)
@@ -57,11 +57,11 @@ knitr::opts_chunk$set(
 This is a simple GitHub page to host some activities for the BIOL365 cohort. It includes the Weeks one through five practicals and some associated files.
 
 ## Directory
-* [Practical one](https://jbdorey.github.io/EvolutionPracs/articles/PhyloPrac1.html)
-* [Practical twp](https://jbdorey.github.io/EvolutionPracs/articles/PhyloPrac2.html)
-* [Practical three](https://jbdorey.github.io/EvolutionPracs/articles/PhyloPrac3.html)
-* [Practical four](https://jbdorey.github.io/EvolutionPracs/articles/PhyloPrac4.html)
-* [Practical five](https://jbdorey.github.io/EvolutionPracs/articles/PhyloPrac5.html)
+* [Practical one](https://jbdorey.github.io/EvolutionPrac/articles/PhyloPrac1.html)
+* [Practical twp](https://jbdorey.github.io/EvolutionPrac/articles/PhyloPrac2.html)
+* [Practical three](https://jbdorey.github.io/EvolutionPrac/articles/PhyloPrac3.html)
+* [Practical four](https://jbdorey.github.io/EvolutionPrac/articles/PhyloPrac4.html)
+* [Practical five](https://jbdorey.github.io/EvolutionPrac/articles/PhyloPrac5.html)
 
 
 ## Authors
