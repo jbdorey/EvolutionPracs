@@ -34,7 +34,11 @@ usethis::use_github_action("pkgdown")
 usethis::use_git_remote("origin", url = NULL, overwrite = TRUE)
 usethis::use_github(private = FALSE)
 # Run a check 
-devtools::check()
+devtools::load_all()
+devtools::document()
+devtools::check(manual = TRUE,
+                remote = TRUE,
+                incoming = TRUE)
 ```
 
 ```{r setup, include=FALSE}

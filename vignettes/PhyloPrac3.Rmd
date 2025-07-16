@@ -14,6 +14,10 @@ output:
     latex_engine: xelatex
 pkgdown:
   as_is: true
+vignette: >
+  %\VignetteIndexEntry{PhyloPrac3}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 always_allow_html: true
 urlcolor: blue
 abstract: "Today we will be re-downloading genetic data and starting to play around with making phylogenetic trees!

@@ -27,10 +27,11 @@ Imports:
     readxl,
     BiocManager,
     stringr,
+    formatR,
     tidyselect
 Suggests: 
-    formatR,
     htmltools,
+    tibble,
     htmlwidgets,
     httr,
     knitr,

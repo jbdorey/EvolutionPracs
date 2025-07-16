@@ -14,6 +14,10 @@ output:
     latex_engine: xelatex
 pkgdown:
   as_is: true
+vignette: >
+  %\VignetteIndexEntry{PhyloPrac5}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 always_allow_html: true
 urlcolor: blue
 abstract: "This prac manual has been put together in a sorta rushed manner just to give you all a little push in the right direction for some common pitfalls and to try and get you on your way with your own assignment. Hopefully it is helpful, it is in no way exhaustive. Please read it through or search it to help you along. **Here's the thing as well, folks, one very important skill in coding is being able to FIND YOUR OWN SOLUTIONS! Google yout error first and you might get a good answer right away!** One of R's strenghts, if you'll remember, is that there are MANY people using it and so many people have come before and probably experienced the same problem that you have. Don't be afraid to have a little look around :) 

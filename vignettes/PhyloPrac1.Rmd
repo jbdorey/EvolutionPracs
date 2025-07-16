@@ -12,6 +12,10 @@ output:
     highlight: pygments
     fig_caption: true
     latex_engine: xelatex
+vignette: >
+  %\VignetteIndexEntry{PhyloPrac1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 pkgdown:
   as_is: true
 abstract: "This practical class should not be particularly onerous. Today is mostly focussed on giving you a very brief overview of what is to come in this practical series and to get you thinking about what you might like to do for your Grant Proposal assignment. 

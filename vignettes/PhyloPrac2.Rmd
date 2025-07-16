@@ -14,6 +14,10 @@ output:
     latex_engine: xelatex
 pkgdown:
   as_is: true
+vignette: >
+  %\VignetteIndexEntry{PhyloPrac2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 urlcolor: blue
 abstract: "R is a very useful programming language that's open access and widely used in science. We don't expect you to become a master by the end of this topic or to understand everything that you're doing right now. But, by helping you get started and giving you robust example code we hope to enable you to succeed using R in the future, should you chose to pick it up more consistently. Here, we will use it as an *example* of how you can run genetic/phylogenetic analyses on a single platform. But note, others do exist. 
 

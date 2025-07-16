@@ -14,6 +14,10 @@ output:
     latex_engine: xelatex
 pkgdown:
   as_is: true
+vignette: >
+  %\VignetteIndexEntry{PhyloPrac4}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 always_allow_html: true
 urlcolor: blue
 abstract: "Today we will bee starting to use phylogenetic trees to ask and try to answer interesting questions. These questions will be up to you, for your assignments, but could relate to ecological, phenotypic, or biogeographical information. Hopefully, you've got a pretty good idea of a taxa of interest and a question that you want to ask about it. You might have the question and see if you can find the data, or you might find some data and see if you can interrogate it in an interesting way. Get creative and get thinking; these are timeless skills!
@@ -133,7 +137,6 @@ finchesML <- alignedDNAbin %>%
     phangorn::maxCladeCred() %>% 
       # We can root the tree at this point
     ape::root(outgroup = "Asemospiza obscura"),
-  BStrees = finchesML, 
   p = 10, type="p", digits=2, main="Ultrafast bootstrap")
 )
 ```
