@@ -27,7 +27,7 @@ setwd("/Users/jamesdorey/Desktop/Uni/Teaching/EvolutionPracs")
 # Run once to configure your package to use and deploy pkgdown
 # usethis::use_pkgdown_github_pages()
 
-# Preview your site locally before publishing
+# Preview your site locally before publishing EACH TIME
 pkgdown::build_site(pkg = "/Users/jamesdorey/Desktop/Uni/Teaching/EvolutionPracs",
                     devel = FALSE)
 usethis::use_github_action("pkgdown")
