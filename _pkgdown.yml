@@ -1,5 +1,5 @@
-url: https://jbdorey.github.io/BIOL361_25/
-title: "BIOL361"
+url: https://jbdorey.github.io/EvolutionPracs/
+title: "Evolution Practicals"
 template:
   bootstrap: 5
   bootswatch: minty
@@ -17,8 +17,8 @@ navbar:
       text: "Articles"
       aria-label: Available pages
       menu:
-      -  text: Prac 1 — R and tidyverse basics
-         href: articles/Prac1_BIOL361.html
+      -  text: Evolution Prac 1 — Getting ready!
+         href: articles/Prac1_BIOL365.html
       -  text: Prac 2 — GIS in R
          href: articles/Prac2_BIOL361.html
       -  text: Birdwing map
