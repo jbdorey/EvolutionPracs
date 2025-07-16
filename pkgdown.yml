@@ -1,0 +1,13 @@
+pandoc: 3.1.11
+pkgdown: 2.1.3
+pkgdown_sha: ~
+articles:
+  PhyloPrac1: PhyloPrac1.html
+  PhyloPrac2: PhyloPrac2.html
+  PhyloPrac3: PhyloPrac3.html
+  PhyloPrac4: PhyloPrac4.html
+  PhyloPrac5: PhyloPrac5.html
+last_built: 2025-07-16T07:21Z
+urls:
+  reference: https://jbdorey.github.io/EvolutionPracs/reference
+  article: https://jbdorey.github.io/EvolutionPracs/articles
