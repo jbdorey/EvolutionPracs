@@ -9,7 +9,7 @@ Description: Evolution practicals by James B Dorey
 License: GPL (>= 3)
 URL: https://jbdorey.github.io/EvolutionPracs/
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
 Imports: 
     dplyr,
     ggplot2,

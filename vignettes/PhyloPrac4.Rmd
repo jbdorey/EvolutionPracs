@@ -102,7 +102,7 @@ lapply(c("dplyr", "magrittr", "ape", "rentrez", "tidyr", "stringr"),
 
 Let us start off about where we were yesterday by loading in the genetic alignment that we saved last week. You can download last week's alignment using the code below as I have hosted the data online.
 
-```{r downloadData, include=TRUE}
+```{r downloadData, include=TRUE, eval = TRUE}
 utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/EPrac4/alignedDNAbin.fasta",
                      destfile = "alignedDNAbin.fasta",
                      method="curl")
@@ -147,15 +147,22 @@ The reason that we've been doing finches this whole time is that I know it's eas
 
 You can download the data from this link — <https://datadryad.org/stash/dataset/doi:10.5061/dryad.150> — under **Download full dataset** on the top right hand bar. Save these to your working directory. We will read in "morphLack.xls"
 
-```{r downloadData_morphology, include=FALSE, eval = TRUE}
+```{r sneakydata, eval = TRUE, include = FALSE}
 gc()
+devtools::load_all()
+path <- system.file("extdata", "morphLack.xls", package = "EvolPracs")
+finchData <- readxl::read_excel(path, sheet = "morphLack.TAB", guess_max = 7000)
+```
+
+```{r downloadData_morphology, include=TRUE, eval = FALSE}
 utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/EPrac4/morphLack.xls",
                      destfile = "morphLack.xls",
                      method="curl")
+
+finchData <- readxl::read_excel("morphLack.xls", sheet = "morphLack.TAB", guess_max = 7000)
 ```
 
 ```{r secretFinchData, eval = TRUE, include=FALSE}
-finchData <- readxl::read_excel("morphLack.xls",sheet = "morphLack.TAB",guess_max = 7000)
 finchSummary <- finchData %>%
   dplyr::mutate(scientificName = paste(GenusL69, SpeciesL69, sep = " ")) %>% dplyr::group_by(scientificName) %>%
   dplyr::summarise(medianBH = median(BeakH, na.rm = TRUE), rangeBH = max(BeakH, na.rm = TRUE) - min(BeakH, na.rm = TRUE)) 
