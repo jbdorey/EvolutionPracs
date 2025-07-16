@@ -1,22 +1,26 @@
-Package: BIOL361
-Title: Conservation Biology
+Package: EvolPracs
+Title: Evolution practicals
 Version: 1.0
 Authors@R: c(
     person("James B.", "Dorey", , "jbdorey@me.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-2721-3842"))
   )
-Description: Conservation Biology at the University of Wollongong
+Description: Evolution practicals by James B Dorey
 License: GPL (>= 3)
-URL: https://jbdorey.github.io/EvolutionPrac/, https://jbdorey.github.io/EvolutionPracs/
+URL: https://jbdorey.github.io/EvolutionPracs/
 Depends: 
     R (>= 2.10)
 Imports: 
     dplyr,
     ggplot2,
-    ggspatial,
     readr,
-    rnaturalearth,
-    sf,
+    ape,
+    rentrez,
+    phangorn,
+    msa,
+    Biostrings,
+    msaR,
+    BiocManager,
     stringr,
     tidyselect
 Suggests: 
@@ -25,14 +29,6 @@ Suggests:
     htmlwidgets,
     httr,
     knitr,
-    leaflet,
-    ape,
-    rentrez,
-    phangorn,
-    msa,
-    Biostrings,
-    msaR,
-    BiocManager,
     magrittr,
     pkgdown,
     plotly,
@@ -40,7 +36,6 @@ Suggests:
     styler,
     kableExtra,
     geodata,
-    tidyterra,
     BeeBDC,
     bdc,
     purrr,
@@ -48,7 +43,6 @@ Suggests:
     rgnparser,
     rmarkdown,
     rmdformats,
-    rnaturalearthdata,
     terra,
     testthat,
     tidyr,
