@@ -1,5 +1,5 @@
 ---
-title: "BIOL365 prac 4 — Macroevolutionary questions!"
+title: "Evolution prac 4 — Macroevolutionary questions!"
 author: Dr James B Dorey and Dr Damien Esquerré, University of Wollongong
 date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2024-08-16"
 output: 
@@ -104,6 +104,9 @@ utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionP
                      method="curl")
 ```
 
+Okay, we have downloaded these data and you can go ahead and look in your working directory (*if you're not sure type "getwd()" into R to see where this is*). Let's go ahead and read it into R.
+
+
 ```{r readFasta, eval = TRUE}
   # Use ape to read in the aligned sequences
 alignedDNAbin <- ape::read.FASTA("alignedDNAbin.fasta") 
@@ -140,6 +143,12 @@ finchesML <- alignedDNAbin %>%
 The reason that we've been doing finches this whole time is that I know it's easy enough to get some finch data from the internet! We will download data from a Dryad database that digitised 6,500 specimens that were measured by David Lack! A treasure trove of data, so thanks to David for making them available!
 
 You can download the data from this link — <https://datadryad.org/stash/dataset/doi:10.5061/dryad.150> — under **Download full dataset** on the top right hand bar. Save these to your working directory. We will read in "morphLack.xls"
+
+```{r downloadData_morphology, include=FALSE}
+utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/EPrac4/morphLack.xls",
+                     destfile = "morphLack.xls",
+                     method="curl")
+```
 
 ```{r secretFinchData, eval = TRUE, include=FALSE}
 finchData <- readxl::read_excel("morphLack.xls",sheet = "morphLack.TAB",guess_max = 7000)

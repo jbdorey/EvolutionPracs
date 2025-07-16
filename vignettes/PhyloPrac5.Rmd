@@ -1,14 +1,19 @@
 ---
-title: "BIOL365 prac 5 — Tips and pitfalls"
+title: "Evolution prac 5 — Tips and pitfalls"
 author: Dr James B Dorey and Dr Damien Esquerré, University of Wollongong
 date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2024-08-23"
 output: 
-  pdf_document:
+   rmarkdown::html_document:
     toc: true
-    toc_depth: 2
+    toc_depth: 3
+    toc_float: true
     number_sections: true
+    theme: cerulean
+    highlight: pygments
     fig_caption: true
-    latex_engine: pdflatex
+    latex_engine: xelatex
+pkgdown:
+  as_is: true
 always_allow_html: true
 urlcolor: blue
 abstract: "This prac manual has been put together in a sorta rushed manner just to give you all a little push in the right direction for some common pitfalls and to try and get you on your way with your own assignment. Hopefully it is helpful, it is in no way exhaustive. Please read it through or search it to help you along. **Here's the thing as well, folks, one very important skill in coding is being able to FIND YOUR OWN SOLUTIONS! Google yout error first and you might get a good answer right away!** One of R's strenghts, if you'll remember, is that there are MANY people using it and so many people have come before and probably experienced the same problem that you have. Don't be afraid to have a little look around :) 
@@ -22,10 +27,15 @@ abstract: "This prac manual has been put together in a sorta rushed manner just 
 # Markdown written by James B Dorey; contact jdorey@uow.edu.au (jbdorey@me.com) if help is needed.
 # markdown packages
 library(rmarkdown)
+library(formatR)
+library(styler)
+library(kableExtra)
 
 # Load core packages
 library(dplyr)
-library(readr)
+
+
+matrix(runif(100), ncol = 20)
 demonstratorVersion = FALSE
 
 ```
@@ -33,8 +43,11 @@ demonstratorVersion = FALSE
 `r if(demonstratorVersion == TRUE){"\\\n\n**THIS IS A DEMONSTRATOR ONLY VERSION**\\\n"}`
 
 ```{r secretRootPath, include=FALSE}
-# Set the RootPath to Prac4 folder
-RootPath <- "/Users/jamesdorey/Desktop/Uni/Teaching/BIOL365_971/BIOL365_pracs_2024/EPrac5"
+ # Set the RootPath to your folder
+RootPath <- tempdir()
+  # You can then set this as the project's working directory. 
+  # This is where R will first look to find 
+  # or save data as a default
 setwd(RootPath)
 ```
 
@@ -177,7 +190,7 @@ install.packages("renv")
 renv::init(RootPath)
 ```
 
-![](Media_EP5_BIOL365/RestartR.png){width="400px"}
+![](Media_EP5/RestartR.png){width="400px"}
 
 ## read.GenBank error
 
@@ -301,7 +314,7 @@ This is a weird issue on some PC laptops. I'm sorry to say that I don't know why
 
 **REMEMBER: this is an interactive plot so scroll across and see the alignment!**
 
-![](Media_EP5_BIOL365/msaR.png)
+![](Media_EP5/msaR.png)
 
 ## Reading in a fasta from a .fasta file vs from read.GenBank
 
@@ -349,7 +362,7 @@ Look guys, I'll start by saying that R can do some amazing things with complex d
 ## Cannot find the function "getYmult()"
 I was hoping that in this case *phytools* would give you a helpful error about which package you needed to install for this function. It does not. Regardless, a simple google of "getYmult()" would return that it comes from the R package *plotrix* which is a suggested (NOT COMPULSARY) dependency for *phytools*. Simply install *plotrix*.
 
-```{r installPlotrix, eval = TRUE}
+```{r installPlotrix, eval = FALSE}
 install.packages("plotrix")
 ```
 

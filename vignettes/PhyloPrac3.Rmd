@@ -1,5 +1,5 @@
 ---
-title: "BIOL365 Evolutionary Prac 3 — Aligning genetic data and building phylogenies in R"
+title: "Evolution Prac 3 — Aligning genetic data and building phylogenies in R"
 author: Dr James B Dorey and Dr Damien Esquerré, University of Wollongong
 date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2024-08-09"
 output: 
