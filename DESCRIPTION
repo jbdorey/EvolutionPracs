@@ -25,6 +25,7 @@ Imports:
     taxadb,
     corHMM,
     readxl,
+    devtools,
     BiocManager,
     stringr,
     formatR,
