@@ -33,6 +33,8 @@ pkgdown::build_site(pkg = "/Users/jamesdorey/Desktop/Uni/Teaching/EvolutionPracs
 usethis::use_github_action("pkgdown")
 usethis::use_git_remote("origin", url = NULL, overwrite = TRUE)
 usethis::use_github(private = FALSE)
+# Run a check 
+devtools::check()
 ```
 
 ```{r setup, include=FALSE}

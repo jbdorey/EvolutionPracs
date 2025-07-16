@@ -205,6 +205,12 @@ library(magrittr)
 
 You can find more info about getting started with *R* and *RStudio*, along with other tutorials at [**Our Coding Club**](https://ourcodingclub.github.io/tutorials/intro-to-r/#download).
 
+# Got a problem with R? CHECK HERE! 
+
+I made the first iteration of these pracs in 2024. That means that there is one year of students (~71 people) who have already been through these practicals. They came up with some common issues and so I decided to help them by collating a list of these issues and potential fixes (or suggestions). These can be found under the [Week 5 prac article](https://jbdorey.github.io/EvolutionPracs/articles/PhyloPrac5.html)! You know what that means? **If you have a problem, go and check there first :)**
+
+I also will update these practicals to improve the learning and so new errors may occur. Do be patient with me as these pracs are tested over and over and are also run on an agnostic machine (GitHub) to make sure that they can work on a computer that is NOT mine. But, now we're running it on up to 100 new computers and with up to 100 new hands typing out possible error ;)
+
 # What's coming next week?
 
 Next week, we will be downloading data from GenBank using a web browser and then using *R*. Once we have those data and have played around with them a little bit, it'll be time for you to explore and maybe start thinking about the data that you want to use for your **Grant Proposal** assignment!

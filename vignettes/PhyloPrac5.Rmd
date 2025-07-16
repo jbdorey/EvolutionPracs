@@ -179,7 +179,7 @@ speciesCountTable <- BeeBDC::taxadbToBeeBDC(name = "Apidae",
 
 ## Trouble with installing packages
 
-Sometimes you will have trouble installing R packages or loading them in. What a drag! Often the easiest optino is to jsut restart R! This is quick and easy from the "Session" drop down in R studio. See **Figure 1** below.
+Sometimes you will have trouble installing R packages or loading them in. What a drag! Often the easiest option is to just restart R! This is quick and easy from the "Session" drop down in R studio. See **Figure 1** below.
 
 An advanced option is to actually set up a new folder to save your packages in. This is actually really easy and can be useful when you want different places to save packages for specific research projects. You can do the below:
 
@@ -368,7 +368,7 @@ install.packages("plotrix")
 
 
 # Data issues
-I have not had too many data issues yet. Remember, that I have actualyl taught you and given you the code for a lot of data management! But, you may also use Excel or similar if you'd prefer — look at the marking guidelines and you'll see that I'm not marking you on which programs you use *per se*. Just be certain that you can meet those criteria to get full marks (I'm happy to give out full marks)!
+I have not had too many data issues yet. Remember, that I have actually taught you and given you the code for a lot of data management! But, you may also use Excel or similar if you'd prefer — look at the marking guidelines and you'll see that I'm not marking you on which programs you use *per se*. Just be certain that you can meet those criteria to get full marks (I'm happy to give out full marks)!
 
 ## Objects are different length
 This is a common issues where you can't combine two objects in R because one is longer/shorter than the other. Probably, you have mixed up code, missed a step or similar. In this case you need to track back the problem by running each object that has led up to that point until you find the number that does not make sense! Maybe, for example, you read in a fasta file without attributes and then you only have your outgroup name and not the ingroup species names! Let me give you an illustrative example below.
