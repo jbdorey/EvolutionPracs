@@ -99,7 +99,7 @@ lapply(c("dplyr", "magrittr", "ape", "rentrez", "tidyr", "stringr"),
 Let us start off about where we were yesterday by loading in the genetic alignment that we saved last week. You can download last week's alignment using the code below as I have hosted the data online.
 
 ```{r downloadData, include=TRUE}
-utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPrac/main/EPrac4/alignedDNAbin.fasta",
+utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/EPrac4/alignedDNAbin.fasta",
                      destfile = "alignedDNAbin.fasta",
                      method="curl")
 ```
@@ -145,7 +145,7 @@ The reason that we've been doing finches this whole time is that I know it's eas
 You can download the data from this link — <https://datadryad.org/stash/dataset/doi:10.5061/dryad.150> — under **Download full dataset** on the top right hand bar. Save these to your working directory. We will read in "morphLack.xls"
 
 ```{r downloadData_morphology, include=FALSE}
-utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPrac/main/EPrac4/morphLack.xls",
+utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/EPrac4/morphLack.xls",
                      destfile = "morphLack.xls",
                      method="curl")
 ```
