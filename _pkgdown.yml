@@ -1,30 +1,4 @@
 url: https://jbdorey.github.io/EvolutionPracs/
-title: "Evolution Practicals"
 template:
   bootstrap: 5
-  bootswatch: minty
-  math-rendering: mathjax
-  light-switch: true
-  assets: assets
-development:
-  mode: auto
-navbar:
-  left:
-    - icon: fa-home
-      href: index.html
-      aria-label: Go to package home
-    - icon: fas fa-book
-      text: "Articles"
-      aria-label: Available pages
-      menu:
-      -  text: Evolution Prac 1 — Getting ready!
-         href: articles/PhyloPrac1.html
-      -  text: Evolution Prac 2 — Access genetic data from GenBank
-         href: articles/PhyloPrac2.html
-      -  text: Evolution Prac 3 — Aligning genetic data and building phylogenies in R
-         href: articles/PhyloPrac3.html
-      -  text: Evolution prac 4 — Macroevolutionary questions!
-         href: articles/PhyloPrac4.html
-      -  text: Evolution prac 5 — Tips and pitfalls
-         href: articles/PhyloPrac5.html
 
