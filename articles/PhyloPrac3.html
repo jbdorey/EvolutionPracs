@@ -162,9 +162,10 @@ Do it all in one go!</p>
 </h3>
 <p>Let us start out by reading our fasta file back in from last week. If
 you’ve not saved the file, go ahead and download my version from
-<strong>GitHub</strong> and save it to your working directory now.</p>
+<strong>GitHub</strong> and save it to your working directory now. Do
+this using the below code.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/EPrac4/DarwinFinches_cytB.rds"</span>,</span>
+<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/vignettes/DarwinFinches_cytB.rds"</span>,</span>
 <span>                     destfile <span class="op">=</span> <span class="st">"DarwinFinches_cytB.rds"</span>,</span>
 <span>                     method<span class="op">=</span><span class="st">"curl"</span><span class="op">)</span></span></code></pre></div>
 <p>In addition to last week I will also get an <strong>outgroup</strong>
@@ -188,7 +189,7 @@ is something to be aware of; taxonomy changes.</p>
 <span><span class="co"># by appending them together.</span></span>
 <span><span class="va">DarwinFinches_cytB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/append.html" class="external-link">append</a></span><span class="op">(</span><span class="va">DarwinFinches_cytB_lw</span>, <span class="va">A_obscura_cytB</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Annoyingly, we need to maually re-create the attributes for the DNAbin object and then re-</span></span>
+<span><span class="co"># Annoyingly, we need to manually re-create the attributes for the DNAbin object and then re-</span></span>
 <span><span class="co"># add them to the DNAbin object</span></span>
 <span><span class="va">DarwinAttributes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes</a></span><span class="op">(</span><span class="va">DarwinFinches_cytB_lw</span><span class="op">)</span><span class="op">$</span><span class="va">names</span>, </span>
