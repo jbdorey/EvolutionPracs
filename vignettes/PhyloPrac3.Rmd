@@ -118,10 +118,10 @@ lapply(c(packageList, "dplyr", "magrittr", "ape", "rentrez"),
 # GenBank data
 ## Read data in
 
-Let us start out by reading our fasta file back in from last week. If you've not saved the file, go ahead and download my version from **GitHub** and save it to your working directory now. 
+Let us start out by reading our fasta file back in from last week. If you've not saved the file, go ahead and download my version from **GitHub** and save it to your working directory now. Do this using the below code.
 
 ```{r downloadData, include=TRUE, eval = TRUE}
-utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/EPrac4/DarwinFinches_cytB.rds",
+utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/vignettes/DarwinFinches_cytB.rds",
                      destfile = "DarwinFinches_cytB.rds",
                      method="curl")
 ```
@@ -141,7 +141,7 @@ A_obscura_cytB <- ape::read.GenBank(access.nb = "HQ153059")
 # by appending them together.
 DarwinFinches_cytB <- append(DarwinFinches_cytB_lw, A_obscura_cytB)
 
-# Annoyingly, we need to maually re-create the attributes for the DNAbin object and then re-
+# Annoyingly, we need to manually re-create the attributes for the DNAbin object and then re-
 # add them to the DNAbin object
 DarwinAttributes <- list(
   names = c(attributes(DarwinFinches_cytB_lw)$names, 

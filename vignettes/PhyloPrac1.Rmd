@@ -246,7 +246,7 @@ Now that we have read it in, you can view the data either by simply running "`Hy
 
 <div class="alert alert-warning" role="alert">
 
-> **Q2:**After *View()*ing the data, tell us, what is in the third column 5th row?
+> **Q2:** After *View()*ing the data, tell us, what is in the third column 5th row?
 
 `r if(demonstratorVersion == TRUE){"**FBA 064760**"}`
 
