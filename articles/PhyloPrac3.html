@@ -207,6 +207,21 @@ major advantages of running these kinds of things in a language like R;
 once you have things set up you can run them again quite quickly. Not
 only that, but what you did <strong>is easily reproducible and resilient
 to new mistakes!</strong> That’s important in science.</p>
+<div class="alert alert-danger" role="alert">
+<p><strong>Warning:</strong> Last year there was an issue with
+downloading too many sequences at once through R. This year I have
+formalised a fix for this issue (<a href="https://jbdorey.github.io/EvolutionPracs/articles/PhyloPrac5.html#read-genbank-error">see
+here for more info</a>). If you’re having trouble downloading say
+&gt;300 sequences in one go, try the below code!</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="co"># Go ahead and install the package "remotes", which we can use to install a very basic package from Github.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Installing package into '/home/runner/work/_temp/Library'</span></span>
+<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
+<span>  <span class="co"># Now,</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jbdorey/EvolutionPracs"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span>, upgrade <span class="op">=</span> <span class="st">"never"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Installing 1 packages: cpp11</span></span></code></pre></div>
+</div>
 </div>
 </div>
 <div class="section level2" number="3">
@@ -230,7 +245,7 @@ the same function that we used to read in all of our packages with the
 script, like the below, don’t stress too much about understanding these
 data manipulations yet, just focus on the outputs and what they
 mean.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Find the sequence lengths and turn them into a numeric list in order of how they were</span></span>
 <span><span class="co"># found in DarwinFinches_cytB</span></span>
 <span><span class="va">seqLengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">DarwinFinches_cytB</span>, <span class="va">length</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -246,7 +261,7 @@ which sequences to take. What we’ll do now is create a data frame (or a
 tibble from the <strong>tibble</strong> package which is nearly the same
 thing but a bit nicer) with all of the information that we might want to
 choose our sequences!</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Lets build a tibble column-by-column</span></span>
 <span><span class="va">genBankSummaryTibble</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  accessionID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes</a></span><span class="op">(</span><span class="va">DarwinFinches_cytB</span><span class="op">)</span><span class="op">$</span><span class="va">names</span>,</span>
@@ -277,7 +292,7 @@ will <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="ex
 the cytB sequence and (2) the control region for cytB. I’ll also remove
 all of the “control region” sequences for you below; but be aware of
 this for your project and check you alignments.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let us begin to manipulate the tibble to do what we want!</span></span>
 <span>  <span class="co"># We will put this new table into a new R object called theChosenSeqs</span></span>
 <span><span class="va">theChosenSeqs</span> <span class="op">&lt;-</span> <span class="va">genBankSummaryTibble</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -315,7 +330,7 @@ numbers from the above table to filter our <em>DNAbin</em> object.</p>
 But, we will use some <em>base</em> R syntax, the square brackets, the
 will select the matching elements to what’s inside the square
 brackets.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List objects often have names for each element in the list; have a look at those</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">DarwinFinches_cytB</span><span class="op">)</span></span>
 <span></span>
@@ -365,7 +380,7 @@ how base pairs might have changed over time at each and every site along
 the sequences; we need to <strong>align the sequences</strong>.
 Sometimes this is straightforwards, sometimes it really is not. But
 let’s find out together if we’ve got an easy alignment ahead of us!</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Here, we'll use a package called msaR to observe and align our sequences</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"msaR"</span>,</span>
 <span>              repos <span class="op">=</span> <span class="st">"http://cran.us.r-project.org"</span><span class="op">)</span></span>
@@ -381,7 +396,7 @@ let’s find out together if we’ve got an easy alignment ahead of us!</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/UBod/msa" class="external-link">msa</a></span><span class="op">)</span></span></code></pre></div>
 <p><img src="Media_EP3/BiocManager.png" width="100"><img src="Media_EP3/msaR.png" width="100"><img src="Media_EP3/Biostrings.png" width="100"><img src="Media_EP3/msa.png" width="100"></p>
 <p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># msaR agrees that fasta is a fantastic data format and but it recognises that not </span></span>
 <span><span class="co"># everyone thinks this way. So, it has provided a function to transform a DNAbin object,</span></span>
@@ -429,7 +444,7 @@ let’s find out together if we’ve got an easy alignment ahead of us!</p>
 <span><span class="va">equalised_BioString</span> <span class="op">&lt;-</span> <span class="fu">Biostrings</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html" class="external-link">readDNAStringSet</a></span><span class="op">(</span><span class="st">"equalisedFasta.fasta"</span><span class="op">)</span></span></code></pre></div>
 <p>If you zoned out for that last section, start paying attention again
 here!</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># START PAYING ATTENTION AGAIN!</span></span>
 <span><span class="co"># finally, we can interactively look at our alignment!</span></span>
 <span><span class="fu">msaR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/msaR/man/msaR.html" class="external-link">msaR</a></span><span class="op">(</span><span class="va">equalised_BioString</span>, menu<span class="op">=</span><span class="cn">T</span>, overviewbox <span class="op">=</span> <span class="cn">T</span>, labelNameLength <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span></code></pre></div>
@@ -439,7 +454,7 @@ messy, especially that the letters don’t really line up nicely along
 columns. You should expect this for an <strong>unaligned</strong> set of
 sequences. Maybe you can even start to see where they might match up!
 So, let’s see if we can change that.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We can use the msa, Multiple Sequence Alignment package to align our sequences </span></span>
 <span><span class="va">alignedFinches</span> <span class="op">&lt;-</span> <span class="fu">msa</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/msa/man/msa.html" class="external-link">msa</a></span><span class="op">(</span><span class="va">equalised_BioString</span><span class="op">)</span></span>
 <span></span>
@@ -471,17 +486,17 @@ genetic distances between sequences. The closer the sequences, the
 closer they’ll be on the tree! We can also tell <strong>ape</strong>
 that we have an outgroup species and it will make that species sister to
 all other taxa.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let us start by converting the msa format sequences back into ape's DNAbin format</span></span>
 <span><span class="va">alignedDNAbin</span> <span class="op">&lt;-</span> <span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/as.alignment.html" class="external-link">as.DNAbin</a></span><span class="op">(</span><span class="va">alignedFinches</span><span class="op">@</span><span class="va">unmasked</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># We then need to build a pairwise distance matrix — the distances between each</span></span>
 <span><span class="co"># pair of sequences </span></span>
 <span><span class="va">distanceFinches</span> <span class="op">&lt;-</span> <span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/dist.dna.html" class="external-link">dist.dna</a></span><span class="op">(</span><span class="va">alignedDNAbin</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Go ahead and have a look at the matrix</span></span>
 <span><span class="va">distanceFinches</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Now we can use that distance matrix to build a phylogenetic tree</span></span>
 <span><span class="va">njFinches</span> <span class="op">&lt;-</span> <span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/nj.html" class="external-link">nj</a></span><span class="op">(</span><span class="va">distanceFinches</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="co"># Specify the outgroup to be sister to all other taxa</span></span>
@@ -524,7 +539,7 @@ you will learn more about next week. But, for now let’s have a peak at
 these methods and the trees and see if anything jumps out at us. We’ll
 want yet another package, for this — “<em>phangorn</em>”, Phylogenetic
 Reconstruction and Analysis.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install and load phangorn</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"phangorn"</span>,</span>
 <span>              repos <span class="op">=</span> <span class="st">"http://cran.us.r-project.org"</span><span class="op">)</span></span>
@@ -541,7 +556,7 @@ The model that we choose depends on our data in terms of which model
 best fits our data and if our data are rich enough to make using a more
 complex model possible! Let us use <strong>phangorn</strong>’s
 <code><a href="https://klausvigo.github.io/phangorn/reference/modelTest.html" class="external-link">modelTest()</a></code> function to look at this.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sadly we need to transform yet another data format from DNAbin to phyDat</span></span>
 <span><span class="co"># Don't ask me why they do this to us ;)</span></span>
 <span><span class="va">aligned_phyDat</span> <span class="op">&lt;-</span> <span class="fu">phangorn</span><span class="fu">::</span><span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/as.phyDat.html" class="external-link">phyDat</a></span><span class="op">(</span><span class="va">alignedDNAbin</span><span class="op">)</span></span>
@@ -588,7 +603,7 @@ statistics?</p>
 </blockquote>
 </div>
 <p>You can also ask phangorn to choose the best model for you!</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Find me the best model, phangoorn!</span></span>
 <span><span class="va">fit_mt</span> <span class="op">&lt;-</span> <span class="fu">phangorn</span><span class="fu">::</span><span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/pml_bb.html" class="external-link">pml_bb</a></span><span class="op">(</span><span class="va">finchTest</span>, </span>
 <span>                  <span class="co"># Change to trace = 1 to see more outputs</span></span>
@@ -609,7 +624,7 @@ rates?</p>
 </blockquote>
 </div>
 <p>Now, let’s make a bootstrapped <em>maximum likelihood</em> tree!</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># You can then feed in the fit_mt from above to build your bootstrap tree</span></span>
 <span><span class="va">bs</span> <span class="op">&lt;-</span> <span class="fu">phangorn</span><span class="fu">::</span><span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/bootstrap.pml.html" class="external-link">bootstrap.pml</a></span><span class="op">(</span><span class="va">fit_mt</span>, </span>
 <span>                                <span class="co"># Using 100 bootstraps</span></span>
@@ -643,7 +658,7 @@ others?</p>
 </div>
 <p>I am also going to save the DNAbin data for use in next week’s
 prac.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Save the DNAbin as a fasta file</span></span>
 <span><span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/write.dna.html" class="external-link">write.FASTA</a></span><span class="op">(</span><span class="va">alignedDNAbin</span>,</span>
 <span>                 <span class="st">"alignedDNAbin.fasta"</span><span class="op">)</span></span></code></pre></div>

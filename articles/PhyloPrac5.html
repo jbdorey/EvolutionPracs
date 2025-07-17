@@ -393,7 +393,15 @@ and for subsequent ones. Coding is powerful.</p>
 <span><span class="va">combinedGenBank</span> <span class="op">&lt;-</span> <span class="va">GenBank_loop</span></span>
 <span></span>
 <span>  <span class="co"># let's now add the attributes to this new object</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes</a></span><span class="op">(</span><span class="va">combinedGenBank</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">attributesList</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes</a></span><span class="op">(</span><span class="va">combinedGenBank</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">attributesList</span></span>
+<span></span>
+<span><span class="co"># This can be downloaded from GitHub as a function using the below code, if the code in Prac 3 fails due to permissions.</span></span>
+<span><span class="co"># First of all, you will need to read in a function that is hosted on my GitHub</span></span>
+<span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/R/DoreyGenbank.R"</span>,</span>
+<span>                     destfile <span class="op">=</span> <span class="st">"DoreyGenbank.R"</span>,</span>
+<span>                     method<span class="op">=</span><span class="st">"curl"</span><span class="op">)</span></span>
+<span>  <span class="co"># and then read in the function</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="st">"DoreyGenbank.R"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2" number="5">
