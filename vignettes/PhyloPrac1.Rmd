@@ -66,6 +66,11 @@ Practicals will be run as the below practical schedule from the course handbook.
 
 ![](Media_P1/PracSchedule.png)
 
+<div class="alert alert-info">
+  <strong> Attention:</strong> <br>
+**Once you have completed all of the questions** and **shown your demonstrator or Lecturer** the answers and the outputs, you may leave. Or, feel free to hang around, play, or help your classmates. 
+</div>
+
 # Working together
 
 You won't be forming groups *per se*, but it is possible to work together on benches to provide your neighbours help with code and the like. I do encourage this as your neighbour may have already overcome errors that you have come across and both the student helping and the one receiving help should benefit! Of course, we will be here to help you as well; your demonstrators should have the answers and, if not, your lecturers will.
@@ -185,6 +190,15 @@ Congratulations, you have set your working directory! *R* can still access files
 
 **A quick pro-tip:** You can run code, once it's entered into your script by having your mouse click on, or above, the line that you want to run and then pressing the "**Run**" button on the top right hand side of the script window. That's a right pain. On mac you can simply use "**command+enter**" and on PC you can use "**control+enter**" to run your code. It'll make you life easier and quicker.
 
+<div class="alert alert-warning" role="alert">
+
+ >**Q1:** What is your working directory? Are you running Windows or Mac and did you need to change the path to make this work?
+
+`r if(demonstratorVersion == TRUE){"**The range of median values is 15.3 (4.2 to 19.5).**"}`
+
+</div>
+
+
 ### Install packages
 
 Let us also quickly install a few packages that we'll need to start with next week (you mostly only need to do this once per package and per version of *R*).
@@ -207,9 +221,50 @@ library(dplyr)
 library(magrittr)
 ```
 
+
+# Read in data
+
+I'm going to borrow this part from another course that I teach into, BIOL361 and so this might be familiar to some of you. But, getting you a little familiar with data in R this week when the mental load is a little lower should help!
+
+Let's go ahead and download a dataset from [this publication](https://doi.org/10.3389/fevo.2024.1339446) to play with. We can start by simply downloading it using the below code (or you could copy the url to the website and download it via your browser, but why not do it all in R?).
+
+```{r downloadData, include=TRUE}
+utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/BIOL361_25/main/DoreyPrac1/SuppCollectionInfo_7Aug2023.csv",
+                     destfile = "SuppCollectionInfo_7Aug2023.csv",
+                     method="curl")
+```
+
+Okay, we have downloaded these data and you can go ahead and look in your working directory (*if you're not sure type "getwd()" into R to see where this is*). Let's go ahead and read it into R and we can also look at it once it's read in. To do this, we will use the **tidyverse** package, **readr**.
+
+```{r readInData}
+  # read in the data using readr
+HylaeusData <- readr::read_csv("SuppCollectionInfo_7Aug2023.csv")
+
+```
+
+Now that we have read it in, you can view the data either by simply running "`HylaeusData`" or "`View(HylaeusData)`". You can also have a scroll below of the dataset.
+
+<div class="alert alert-warning" role="alert">
+
+> **Q2:**After *View()*ing the data, tell us, what is in the third column 5th row?
+
+`r if(demonstratorVersion == TRUE){"**FBA 064760**"}`
+
+</div>
+
+
+```{r, outputTable1, echo=FALSE}
+kableExtra::kbl(HylaeusData) %>%
+  kableExtra::kable_material(c("striped", "hover")) %>%
+  kableExtra::kable_styling(bootstrap_options = "responsive", full_width = F, fixed_thead = T) %>%
+  kableExtra::scroll_box(height = "350px")
+
+```
+
+
 You can find more info about getting started with *R* and *RStudio*, along with other tutorials at [**Our Coding Club**](https://ourcodingclub.github.io/tutorials/intro-to-r/#download).
 
-# Got a problem with R? CHECK HERE! 
+# Got a problem with R? **CHECK HERE!**
 
 I made the first iteration of these pracs in 2024. That means that there is one year of students (~71 people) who have already been through these practicals. They came up with some common issues and so I decided to help them by collating a list of these issues and potential fixes (or suggestions). These can be found under the [Week 5 prac article](https://jbdorey.github.io/EvolutionPracs/articles/PhyloPrac5.html)! You know what that means? **If you have a problem, go and check there first :)**
 
