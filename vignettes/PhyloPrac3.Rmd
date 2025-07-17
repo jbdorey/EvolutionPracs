@@ -158,6 +158,21 @@ attributes(DarwinFinches_cytB) <- DarwinAttributes
 
 Great, that was pretty easy wasn't it? This demonstrates one of the major advantages of running these kinds of things in a language like R; once you have things set up you can run them again quite quickly. Not only that, but what you did **is easily reproducible and resilient to new mistakes!** That's important in science. 
 
+<div class="alert alert-danger" role="alert">
+**Warning:** Last year there was an issue with downloading too many sequences at once through R. This year I have formalised a fix for this issue ([see here for more info](https://jbdorey.github.io/EvolutionPracs/articles/PhyloPrac5.html#read-genbank-error)). If you're having trouble downloading say >300 sequences in one go, try the below code! 
+
+```{r genbankMassRead, eval = TRUE, show = TRUE}
+  # Go ahead and install the package "remotes", which we can use to install a very basic package from Github.
+install.packages("remotes")
+  # Now,
+remotes::install_github("jbdorey/EvolutionPracs", quiet = TRUE, upgrade = "never")
+
+
+
+```
+
+</div>
+
 # Filter sequences
 
 Alright, now that I've had my little preach, let's address another issue. We have 171 sequences, so there are more than one per species. That might be fine depending on your analysis but it'll complicate things down the line in a way that we really just don't need. Lets make things easy; we'll try to take *one individual per species*. But, not all of the sequences are the same length! Longer sequences *might* lead to better chances of overlapping our gene regions, so lets first figure out how long each sequence is. Unfortunately, **ape** doesn't keep the sequence length in the attributes of the file, but we can figure that out using `lapply()` — the same function that we used to read in all of our packages with the `library()` function! Let us do the same with the `length()` function.

@@ -282,6 +282,14 @@ combinedGenBank <- GenBank_loop
   # let's now add the attributes to this new object
 attributes(combinedGenBank) <- attributesList
 
+# This can be downloaded from GitHub as a function using the below code, if the code in Prac 3 fails due to permissions.
+# First of all, you will need to read in a function that is hosted on my GitHub
+utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/R/DoreyGenbank.R",
+                     destfile = "DoreyGenbank.R",
+                     method="curl")
+  # and then read in the function
+source("DoreyGenbank.R")
+
 ```
 
 # Common alignment/tree issues
