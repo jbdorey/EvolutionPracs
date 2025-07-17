@@ -99,6 +99,12 @@ Dorey and Dr Damien Esquerré, University of Wollongong</h4>
       to solve those issues! </strong>
     </div>
     
+<div class="alert alert-info">
+<p><strong> Attention:</strong> <br><strong>Once you have completed all
+of the questions</strong> and <strong>shown your demonstrator or
+Lecturer</strong> the answers and the outputs, you may leave. Or, feel
+free to hang around, play, or help your classmates.</p>
+</div>
 <div class="section level2" number="1">
 <h2 id="script-preparation">
 <span class="header-section-number">1</span> Script preparation<a class="anchor" aria-label="anchor" href="#script-preparation"></a>
@@ -264,10 +270,12 @@ normally distributed…</p>
 <span></span>
 <span><span class="co"># Have a look at these data by getting a quick summary</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">)</span></span></code></pre></div>
+<div class="alert alert-warning" role="alert">
 <blockquote>
 <p><strong>Q1:</strong> What is the range of the median beak height
 values?</p>
 </blockquote>
+</div>
 <p>I’ll show you, but don’t expect you to emulate this, that we can use
 a <em>Shapiro-Wilk Normality Test</em> to statistically test if our data
 significantly differs from a normal distribution</p>
@@ -384,11 +392,13 @@ answer will be. For this we can ignore the phylogeny</p>
 <span></span>
 <span>  <span class="co"># Now, let's test our hypothesis!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">linear_BH</span><span class="op">)</span></span></code></pre></div>
+<div class="alert alert-warning" role="alert">
 <blockquote>
 <p><strong>Q2:</strong> Ignoring phylogeny, are median beak height and
 log range of beak height significantly correlated? What’s the
 significance level (p-value) for the model?</p>
 </blockquote>
+</div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Like I mentioned, the linear model is jsut a line; so we can also plot that line!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">$</span><span class="va">medianBH</span>, <span class="va">finchSummary</span><span class="op">$</span><span class="va">log_rangeBH</span><span class="op">)</span></span>
@@ -457,11 +467,13 @@ gives a VERY similar answer anyway.)</em></p>
 <span></span>
 <span>  <span class="co"># Let's test this new hypothesis</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">picLM</span><span class="op">)</span></span></code></pre></div>
+<div class="alert alert-warning" role="alert">
 <blockquote>
 <p><strong>Q3:</strong> Do you come to the same or a different
 conclusion, in regards to our hypothesis, given this pic analysis?
 What’s the p-value of this model?</p>
 </blockquote>
+</div>
 <p>We can plot this model as well!</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Make the plot</span></span>
@@ -533,10 +545,12 @@ variable<a class="anchor" aria-label="anchor" href="#continuous-variable"></a>
 <p>Hey, look at that! There are very few species with high beaks, and
 they are mostly grouped in one genus, <em>Geospiza</em>! That’s
 cool.</p>
+<div class="alert alert-warning" role="alert">
 <blockquote>
 <p><strong>Q4:</strong> From the tree, which species has the biggest
 median beak height?</p>
 </blockquote>
+</div>
 </div>
 <div class="section level4" number="4.0.2">
 <h4 id="categorical-variable">
@@ -674,15 +688,19 @@ nodes with more consistent states, you can see that the probabilities
 are higher that the ancestor had that state. Maybe it would be better
 with more states, or better genetic data that gave us longer branch
 lengths, I can’t say for sure!</p>
+<div class="alert alert-warning" role="alert">
 <blockquote>
 <p><strong>Q5:</strong> Is it more likely that the common ancestor of
 <em>Camarhynchus pallidus</em> and <em>Geospiza scandens</em> had a
 large or a small beak?</p>
 </blockquote>
+</div>
+<div class="alert alert-warning" role="alert">
 <blockquote>
 <p><strong>Q6</strong> How would you change the colour of the categories
 in your phylogeny?</p>
 </blockquote>
+</div>
 <p><strong>A small byword:</strong> Running analyses in almost any
 statistical program involves transforming your data into different
 formats. Depending on the data and the analyses that you’re doing this
