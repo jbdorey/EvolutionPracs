@@ -24,6 +24,8 @@ DoreyGenbank(
 
 \item{term}{character, the search term. The syntax used in making these searches is described in the Details of this help message, the package vignette and reference given below.}
 
+\item{retmax}{numeric. The maximum number of sequences to return and download in a single search.}
+
 \item{config}{vector configuration options passed to httr::GET}
 
 \item{retmode}{character, one of json (default) or xml. This will make no difference in most cases.}
