@@ -604,7 +604,7 @@ Listen... I'm not entirely without compassion. Sometimes doing stuff in R might 
 
 I have already given you a way to manually download your data from GenBank. There are also more manual/GUI ways to align sequences and to build trees! In fact, these are broadly implemented as can still be a good way to learn and certainly can be a good way to do science. *I just tend to prefer offering you a way to do everything in one place.*
 
-With this in mind, I have also built a tutorial to help you align sequences and build a tree using a simple enough GUI program called Molecular Evolutionary Genetics Analysis (**MEGA**). This program can be downloaded [**here**](https://www.megasoftware.net). 
+With this in mind, I have also built a tutorial to help you align sequences and build a tree using a simple enough GUI program called Molecular Evolutionary Genetics Analysis (**MEGA**). This program can be downloaded [**here**](https://www.megasoftware.net). The tutorial is located [here](https://jbdorey.github.io/EvolutionPracs/articles/MEGA_tutorial.html)).
 
 # What's coming next week?
 
