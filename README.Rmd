@@ -15,6 +15,8 @@ editor_options:
 
 <!-- badges: end -->
 
+# <a href='https://github.com/jbdorey/EvolutionPracs'><img src="https://github.com/jbdorey/EvolutionPracs/blob/main/NC.png?raw=true" alt="A cartoonised phylogeny of bees with changing triats" align="right" width="300"/></a>
+
 ```{r websiteSetUp, eval = FALSE, include=FALSE}
 setwd("/Users/jamesdorey/Desktop/Uni/Teaching/EvolutionPracs")
 

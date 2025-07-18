@@ -7,6 +7,9 @@ Dr James B Dorey, University of Wollongong
 [![License](https://img.shields.io/badge/license-GPL%20(%3E=%203)-lightgrey.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 <!-- badges: end -->
+
+# <a href='https://github.com/jbdorey/EvolutionPracs'><img src="https://github.com/jbdorey/EvolutionPracs/blob/main/NC.png?raw=true" alt="A cartoonised phylogeny of bees with changing triats" align="right" width="300"/></a>
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ### University of Wollongong
