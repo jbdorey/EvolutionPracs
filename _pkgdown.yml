@@ -27,4 +27,6 @@ navbar:
       href: articles/PhyloPrac4.html
     - text: Evolution prac 5 — Tips and pitfalls
       href: articles/PhyloPrac5.html
+      - text: Evolution Prac MEGA supplement — Using MEGA to align sequences and build trees
+      href: articles/MEGA_tutorial.html
 

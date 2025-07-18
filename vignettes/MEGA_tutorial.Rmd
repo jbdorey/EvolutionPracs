@@ -205,14 +205,30 @@ utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionP
 ```
 
 ```{r readInNewick}
-tree <- phytools::read.newick()
+  # read in the newick tree from the file 
+tree <- phytools::read.newick(file = "MEGA_tree.nwk")
+  # Read in the neqick tree from text! 
+tree <- phytools::read.newick(text = "(((((((Asemospiza_obscura_HQ153059,Geospiza_fortis_21616577)0.8160,Geospiza_difficilis_696154205)0.5400,(Certhidea_fusca_696154149,Certhidea_olivacea_696154217)0.5640)0.9300,Geospiza_septentrionalis_696154211)0.8000,Geospiza_magnirostris_696154197,Geospiza_conirostris_696154153,Geospiza_fuliginosa_696154219)0.5380,Geospiza_scandens_696154203)0.9700,Camarhynchus_heliobates_696154169,Camarhynchus_psittacula_696154121,Camarhynchus_pallidus_696154183Camarhynchus_parvulus_696154177,Camarhynchus_pauper_696154127);")
 
-
+  # Plot the tree using phytools
+phytools::plotTree(tree, ftype = "i", fsize = 0.5, lwd = 1)
+  # Add in the nodes
+phytools::labelnodes(text = tree$node.label %>% as.numeric() %>% round(2),
+                     node = tree$edge[,1],
+                     interactive = FALSE,
+                     shape = "circle",
+                     cex = 0.7)
 ```
 
+That will just about catch you up to where we are in practical 4! 
 
+<div class="alert alert-danger" role="alert">
 
+**Assignment note:**
 
+Make certain that you have all of the information that you would need to report how you did this in your assignment.
+
+</div>
 
 
 
