@@ -219,11 +219,6 @@ David for making them available!</p>
 bar. Save these to your working directory. We will read in
 “morphLack.xls”</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/EPrac4/morphLack.xls"</span>,</span>
-<span>                     destfile <span class="op">=</span> <span class="st">"morphLack.xls"</span>,</span>
-<span>                     method<span class="op">=</span><span class="st">"curl"</span><span class="op">)</span></span>
-<span><span class="va">finchData</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="st">"morphLack.xls"</span>, sheet <span class="op">=</span> <span class="st">"morphLack.TAB"</span>, guess_max <span class="op">=</span> <span class="fl">7000</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We can read these data into R very easily using readxl</span></span>
 <span><span class="va">finchData</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="st">"morphLack.xls"</span>,</span>
 <span>                         sheet <span class="op">=</span> <span class="st">"morphLack.TAB"</span>,</span>
@@ -253,7 +248,7 @@ consider is that there are loads of measurements and we only want one
 per species. We could take the mean or median values per species.
 Firstly, we can make a quick histogram of this variable to see if it is
 normally distributed…</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Have a look at the histogram</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">finchData</span><span class="op">$</span><span class="va">BeakH</span><span class="op">)</span></span>
 <span><span class="co"># I'd say that's right-skewed and so let's use a median value</span></span>
@@ -280,7 +275,7 @@ values?</p>
 <p>I’ll show you, but don’t expect you to emulate this, that we can use
 a <em>Shapiro-Wilk Normality Test</em> to statistically test if our data
 significantly differs from a normal distribution</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># If p-value &gt; 0.05, we'd say that we can't reject the null hypothesis (normal</span></span>
 <span>  <span class="co"># distribution)... This is close enough!</span></span>
 <span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html" class="external-link">shapiro.test</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">$</span><span class="va">medianBH</span><span class="op">)</span></span>
@@ -298,7 +293,7 @@ trait data<a class="anchor" aria-label="anchor" href="#match-genetic-and-trait-d
 <p>We have two different datasets that we want to work together with, so
 let’s see how well they overlap with one another and then start making
 them work together.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let us have a look at how well our taxon names match between the genes</span></span>
 <span><span class="co"># and the trait data</span></span>
 <span>  <span class="co"># Extract the DNA names</span></span>
@@ -316,7 +311,7 @@ but, for our purposes, I’m pretty happy with that result. We can look at
 trait evolution across 12 species with these data.</p>
 <p>Now, let’s <em>prune</em> our tree to make sure that the data
 overlap.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># We can drop the tips on our tree that don't have trait data associated with them.</span></span>
 <span><span class="va">treeML_dropped</span> <span class="op">&lt;-</span> <span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html" class="external-link">drop.tip</a></span><span class="op">(</span><span class="va">treeML</span>,</span>
 <span>                      tip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Geospiza septentrionalis"</span>, <span class="st">"Certhidea fusca"</span>, </span>
@@ -379,7 +374,7 @@ regression<a class="anchor" aria-label="anchor" href="#regular-regression"></a>
 <p>Let’s begin by using regular-old linear regression to test our
 hypothesis. Keep in mind that, as of writing this, I don’t know what the
 answer will be. For this we can ignore the phylogeny</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># We can start by just plotting these two variables to see how they look</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">$</span><span class="va">medianBH</span>, <span class="va">finchSummary</span><span class="op">$</span><span class="va">log_rangeBH</span><span class="op">)</span></span>
 <span></span>
@@ -400,8 +395,8 @@ log range of beak height significantly correlated? What’s the
 significance level (p-value) for the model?</p>
 </blockquote>
 </div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="co"># Like I mentioned, the linear model is jsut a line; so we can also plot that line!</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="co"># Like I mentioned, the linear model is just a line; so we can also plot that line!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">$</span><span class="va">medianBH</span>, <span class="va">finchSummary</span><span class="op">$</span><span class="va">log_rangeBH</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="va">linear_BH</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -424,7 +419,7 @@ using <code><a href="https://rdrr.io/pkg/ape/man/multi2di.html" class="external-
 data, but should be fine as a demonstration; we could also fix this by
 adding more genetic data or choosing a different gene with more
 variation.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Make a new tree to not save-over our "real" tree</span></span>
 <span><span class="va">treeML_fixed</span> <span class="op">&lt;-</span> <span class="va">treeML_dropped</span></span>
 <span>  <span class="co"># Add a small branch length (0.001) to those with an exactly zero length (0);</span></span>
@@ -446,7 +441,7 @@ variation.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">treeML_fixed</span>, main <span class="op">=</span> <span class="st">"New plot"</span>, sub <span class="op">=</span> <span class="st">"now with tiny branches added"</span>, </span>
 <span>     col.sub <span class="op">=</span> <span class="st">"darkred"</span>, cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="PhyloPrac4_files/figure-html/picCorrection-1.png" width="672"></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Return R's plots to a single one! </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Okay, let’s now do our PIC! We need to run our pic regression through
@@ -456,7 +451,7 @@ arbitrary and so is the direction of subtraction (pic values can be - or
 +; see <code>pic_logRangeBH</code>). So our pic regression should go
 through zero and have no intercept term. <em>(Running without this term
 gives a VERY similar answer anyway.)</em></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Let's calculate PIC for log range BH and for median BH</span></span>
 <span><span class="va">pic_logRangeBH</span> <span class="op">&lt;-</span> <span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/pic.html" class="external-link">pic</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">$</span><span class="va">log_rangeBH</span>, </span>
 <span>                 <span class="va">treeML_fixed</span><span class="op">)</span></span>
@@ -476,7 +471,7 @@ What’s the p-value of this model?</p>
 </blockquote>
 </div>
 <p>We can plot this model as well!</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Make the plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pic_logRangeBH</span>, <span class="va">pic_medianBH</span><span class="op">)</span></span>
 <span>  <span class="co"># Add in some dashed lines through zero on the horizontal and vertical</span></span>
@@ -484,12 +479,11 @@ What’s the p-value of this model?</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">0</span>, lty <span class="op">=</span> <span class="st">"dotted"</span><span class="op">)</span></span>
 <span>  <span class="co"># Add in the model regression.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="va">picLM</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p>Listen, I’ve given you a lot to think about here. I’d be very pleased
-if you’ve come this far in our prac. What follows is also a very useful
-tool in macroevolutionary analyses. I’d encourage you to at least have a
-look at the outputs and try to make it through the <em>continuous
-variables</em> part. <em>Categorical variables</em> get a little more
-complicated.</p>
+<p>Listen, I’ve given you a lot to think about here. I’m very pleased if
+you’ve come this far in our prac. What follows is also a very useful
+tool in macroevolutionary analyses. I would strongly recommend paying
+attention here as these kinds of analyses might be very useful for your
+assignment!</p>
 </div>
 </div>
 <div class="section level2" number="4">
@@ -500,7 +494,7 @@ reconstruction<a class="anchor" aria-label="anchor" href="#ancestral-state-recon
 <p>We will now use an awesome package called <strong>phytools</strong>,
 which was written by Liam Revell, who also wrote <strong>Phylogenetic
 Comparitive Methods in R</strong>. We can install that now.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"phytools"</span>,</span>
 <span>              repos <span class="op">=</span> <span class="st">"http://cran.us.r-project.org"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/liamrevell/phytools" class="external-link">phytools</a></span><span class="op">)</span></span></code></pre></div>
@@ -514,7 +508,7 @@ reconstructions</em>. We will do just that!</p>
 <span class="header-section-number">4.0.1</span> Continuous
 variable<a class="anchor" aria-label="anchor" href="#continuous-variable"></a>
 </h4>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get a vector with the median beak heights and the scientific names</span></span>
 <span><span class="va">medianVector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">$</span><span class="va">medianBH</span>, <span class="va">finchSummary</span><span class="op">$</span><span class="va">scientificName</span><span class="op">)</span></span>
 <span> </span>
@@ -534,7 +528,7 @@ variable<a class="anchor" aria-label="anchor" href="#continuous-variable"></a>
 <span>                     shape <span class="op">=</span> <span class="st">"circle"</span>,</span>
 <span>                     cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="PhyloPrac4_files/figure-html/fastAnc-1.png" width="672"></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  </span>
 <span><span class="co"># We can also use phytools to map this evolution as a continuous trait along</span></span>
 <span><span class="co"># our tree branchs!</span></span>
@@ -563,11 +557,27 @@ However, we could make a continuous variable categorical, and so let’s
 use beak height again. We can make a histogram and see that there are
 some natural breaks in beak height (see below). Let’s split it into
 small (&lt;10 mm) and large beaks (&gt;10 mm).</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="alert alert-danger" role="alert">
+<p><strong>Attention:</strong></p>
+<p>Last year, many students just breezed through this and never htought
+about what they were doing. You should be asking yourself, WHY am I
+turning these data into a categorical dataset? Is it because I need to
+do this or is it because James wants to give you an easy example of how
+to analyse a categorical dataset?</p>
+<p>Do I need to do this for my continuous data, if I choose to use
+continuous data, in my assignment?</p>
+<p>Think about that for me, would you? If fact that’s what question 5
+has become…</p>
+<blockquote>
+<p><strong>Q5:</strong> Do I need to transform my continuous data into
+categorical data for my assignment?</p>
+</blockquote>
+</div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See the histogram of species median beak height</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">$</span><span class="va">medianBH</span>, breaks <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p><img src="PhyloPrac4_files/figure-html/categorical%20reconstruction-1.png" width="672"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Make this into a categorical variable using an if-else statement</span></span>
 <span><span class="va">finchSummary</span> <span class="op">&lt;-</span> <span class="va">finchSummary</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -611,7 +621,7 @@ small (&lt;10 mm) and large beaks (&gt;10 mm).</p>
 node is large or small using <em>marginal ancestral state
 reconstruction</em>. We’ll need another package for this —
 <strong>corHMM</strong>. <em>Sorry, it doesn’t have a logo :(</em></p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install and load the package</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"corHMM"</span>,</span>
 <span>              repos <span class="op">=</span> <span class="st">"http://cran.us.r-project.org"</span><span class="op">)</span></span>
@@ -620,7 +630,7 @@ reconstruction</em>. We’ll need another package for this —
 into numbers (0, 1, 2, 3, … etcetera)! We can do this transformation in
 text by converting it first into a factor and then into a number and
 taking 1 away so that it starts at zero.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Modify the finch data to be numbered categorical with only species name</span></span>
 <span><span class="co"># and that numbered factor in a DATA FRAME format</span></span>
@@ -691,17 +701,18 @@ with more states, or better genetic data that gave us longer branch
 lengths, I can’t say for sure!</p>
 <div class="alert alert-warning" role="alert">
 <blockquote>
-<p><strong>Q5:</strong> Is it more likely that the common ancestor of
+<p><strong>Q6:</strong> Is it more likely that the common ancestor of
 <em>Camarhynchus pallidus</em> and <em>Geospiza scandens</em> had a
 large or a small beak?</p>
 </blockquote>
 </div>
 <div class="alert alert-warning" role="alert">
 <blockquote>
-<p><strong>Q6</strong> How would you change the colour of the categories
-in your phylogeny?</p>
+<p><strong>Q7</strong> How would you coe in a change in the colour of
+the categories in your phylogeny?</p>
 </blockquote>
 </div>
+<div class="alert alert-success" role="alert">
 <p><strong>A small byword:</strong> Running analyses in almost any
 statistical program involves transforming your data into different
 formats. Depending on the data and the analyses that you’re doing this
@@ -710,11 +721,55 @@ single program and a single script is really very convenient. I don’t
 expect you to remember or understand all of my data manipulations but,
 trust me, keep these pracs with you and the code may very well come in
 handy for the future. <em>This is how I got started with R.</em></p>
+<p>I’m saying, save the URL for the pracs (I’ll try and keep it alive)
+or better yet, save these pages as a PDF!</p>
+</div>
 </div>
 </div>
 <div class="section level2" number="5">
+<h2 id="your-homework">
+<span class="header-section-number">5</span> Your homework<a class="anchor" aria-label="anchor" href="#your-homework"></a>
+</h2>
+<div class="alert alert-warning" role="alert">
+<p><strong>Attention:</strong> It is now the end of Week 4 (next week),
+I want you to have the data that you mentioned in Question 12; prac 2.
+You will need to show this to your demonstrator. I have re-phrased this
+below:</p>
+<blockquote>
+<p><strong>Q12; prac 2:</strong> Show your demonstrator…</p>
+<ul>
+<li>taxon that’s interesting to you;</li>
+<li>The number of species in that group;</li>
+<li>The appropriate number of <strong>ALIGNED</strong> sequences (for 7
+= 30 species/subspecies);</li>
+<li>and what gene region you have chosen?</li>
+</ul>
+</blockquote>
+<p>What if you don’t have these data to show now? Well, we will be very
+concerned about you. We might frown at you and give you a gentle
+admonishment. If you’re lucky, we’ll help you to find the data but
+<strong>don’t expect us to stay late if you haven’t reached out for help
+early.</strong></p>
+</div>
+<div class="alert alert-danger" role="alert">
+<p><strong>Attention:</strong></p>
+<p>I have more homework for you. By next week, at the minimum, I want
+you to <strong>have your trait data</strong> and to have attempted to
+<strong>align it with your phylogenetic data</strong> and <strong>have
+it plotted</strong>.</p>
+<p>The further along you are, the better we will be able to help you.
+<strong>Remember</strong>, we only have so long in the prac class and
+there are only so many demonstrators. We won’t be able to give you our
+undivided attention (<em>I’m sorry, I’d really like to be able
+to!</em>), so please come as prepared as you can but don’t be afraid to
+ask for help with genuine problems. I know that this assignment can be
+challenging and that’s why we have a whole prac time available to seek
+help.</p>
+</div>
+</div>
+<div class="section level2" number="6">
 <h2 id="whats-coming-next-week">
-<span class="header-section-number">5</span> What’s coming next
+<span class="header-section-number">6</span> What’s coming next
 week?<a class="anchor" aria-label="anchor" href="#whats-coming-next-week"></a>
 </h2>
 <p>Next week we will be talking about your assignment and providing help
@@ -732,15 +787,15 @@ component.</p>
 <p><strong>Be certain to save your R script from this week to help you
 with your assignment!</strong></p>
 </div>
-<div class="section level2" number="6">
+<div class="section level2" number="7">
 <h2 id="a-reminder-of-the-assignment-guidelines">
-<span class="header-section-number">6</span> A reminder of the
+<span class="header-section-number">7</span> A reminder of the
 assignment guidelines<a class="anchor" aria-label="anchor" href="#a-reminder-of-the-assignment-guidelines"></a>
 </h2>
 <p><strong>Please check Moodle for the most-recent version</strong></p>
-<div class="section level3" number="6.1">
+<div class="section level3" number="7.1">
 <h3 id="part-a-preliminary-phylogeny-5">
-<span class="header-section-number">6.1</span> Part (a) —
+<span class="header-section-number">7.1</span> Part (a) —
 preliminary phylogeny (5%)<a class="anchor" aria-label="anchor" href="#part-a-preliminary-phylogeny-5"></a>
 </h3>
 <p>The idea of this component of the grant proposal assignment is to (i)
@@ -844,9 +899,9 @@ prior to submission</td>
 </tbody>
 </table>
 </div>
-<div class="section level3" number="6.2">
+<div class="section level3" number="7.2">
 <h3 id="part-b-project-quality-and-innovation-15">
-<span class="header-section-number">6.2</span> Part (b) — Project
+<span class="header-section-number">7.2</span> Part (b) — Project
 quality and innovation (15%)<a class="anchor" aria-label="anchor" href="#part-b-project-quality-and-innovation-15"></a>
 </h3>
 <p>The idea of this component of the grant proposal assignment is to (i)
@@ -1037,9 +1092,9 @@ is unclear that the project would have any benefits</td>
 <p><br><br><br><br></p>
 </div>
 </div>
-<div class="section level2" number="7">
+<div class="section level2" number="8">
 <h2 id="new-packages-used-today">
-<span class="header-section-number">7</span> New packages used
+<span class="header-section-number">8</span> New packages used
 today<a class="anchor" aria-label="anchor" href="#new-packages-used-today"></a>
 </h2>
 <p><img src="Media_EP4/readxl.png" width="200"><img src="Media_EP4/phytools.png" width="200"> And <strong>corHMM</strong>
