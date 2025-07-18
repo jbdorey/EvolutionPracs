@@ -598,6 +598,14 @@ ape::write.FASTA(alignedDNAbin,
 ```
 
 
+# Do you REALLY hate doing this in R?
+
+Listen... I'm not entirely without compassion. Sometimes doing stuff in R might just hurt your brain too much. Maybe, just maybe, you consider being forced to code *EVERYTHING* to be emotional abuse. I may not agree, but others do ;) 
+
+I have already given you a way to manually download your data from GenBank. There are also more manual/GUI ways to align sequences and to build trees! In fact, these are broadly implemented as can still be a good way to learn and certainly can be a good way to do science. *I just tend to prefer offering you a way to do everything in one place.*
+
+With this in mind, I have also built a tutorial to help you align sequences and build a tree using a simple enough GUI program called Molecular Evolutionary Genetics Analysis (**MEGA**). This program can be downloaded [**here**](https://www.megasoftware.net). 
+
 # What's coming next week?
 
 Next week we will be focusing on doing something interesting and useful with our phylogeny! We will be starting to think about harvesting ecological, phenotypic, or biogeographic data to test a macro-evolutionary hypothesis using your phylogeny. We will be using Darwin's finches once again but you should be advanced enough to have at the very least an idea of what group you will examine for your project.
