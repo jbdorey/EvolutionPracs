@@ -160,7 +160,7 @@ utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionP
 finchData <- readr::read_csv("morphLack.csv", guess_max = 7000)
 ```
 
-```{r downloadData_morphology, include=TRUE, eval = FALSE}
+```{r downloadData_morphology, include=FALSE, eval = FALSE}
 utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/EPrac4/morphLack.xls",
                      destfile = "morphLack.xls",
                      method="curl")
@@ -322,7 +322,7 @@ summary(linear_BH)
 </div>
 
 ```{r plotRegularRegression, eval = demonstratorVersion}
-  # Like I mentioned, the linear model is jsut a line; so we can also plot that line!
+  # Like I mentioned, the linear model is just a line; so we can also plot that line!
 plot(finchSummary$medianBH, finchSummary$log_rangeBH)
 abline(linear_BH, col = "red", lwd = 2)
 
@@ -396,7 +396,7 @@ abline(picLM, col = "red", lwd = 2)
 
 ```
 
-Listen, I've given you a lot to think about here. I'd be very pleased if you've come this far in our prac. What follows is also a very useful tool in macroevolutionary analyses. I'd encourage you to at least have a look at the outputs and try to make it through the *continuous variables* part. *Categorical variables* get a little more complicated.
+Listen, I've given you a lot to think about here. I'm very pleased if you've come this far in our prac. What follows is also a very useful tool in macroevolutionary analyses. I would strongly recommend paying attention here as these kinds of analyses might be very useful for your assignment! 
 
 # Ancestral state reconstruction
 
@@ -459,6 +459,22 @@ Hey, look at that! There are very few species with high beaks, and they are most
 ### Categorical variable
 
 We don't necessarily have a great categorical data in our dataset. However, we could make a continuous variable categorical, and so let's use beak height again. We can make a histogram and see that there are some natural breaks in beak height (see below). Let's split it into small (\<10 mm) and large beaks (\>10 mm).
+
+<div class="alert alert-danger" role="alert">
+**Attention:**
+
+Last year, many students just breezed through this and never htought about what they were doing. You should be asking yourself, WHY am I turning these data into a categorical dataset? Is it because I need to do this or is it because James wants to give you an easy example of how to analyse a categorical dataset? 
+
+Do I need to do this for my continuous data, if I choose to use continuous data, in my assignment? 
+
+Think about that for me, would you? If fact that's what question 5 has become...
+
+> **Q5:** Do I need to transform my continuous data into categorical data for my assignment? 
+
+`r if(demonstratorVersion == TRUE){"**Please. For the love of God, don't.**"}`
+
+</div>
+
 
 ```{r categorical reconstruction}
 # See the histogram of species median beak height
@@ -552,7 +568,7 @@ That's a pretty cool plot, I think. It shows the probability at each node that t
 
 <div class="alert alert-warning" role="alert">
 
-> **Q5:** Is it more likely that the common ancestor of *Camarhynchus pallidus* and *Geospiza scandens* had a large or a small beak?
+> **Q6:** Is it more likely that the common ancestor of *Camarhynchus pallidus* and *Geospiza scandens* had a large or a small beak?
 
 `r if(demonstratorVersion == TRUE){"**It's most likely that the common ancestor had a small beak. The pie chart at their most-recent common ancestor (the fourth node from the root) shows >75% probability of being a small-beaked species.**"}`
 
@@ -560,7 +576,7 @@ That's a pretty cool plot, I think. It shows the probability at each node that t
 
 <div class="alert alert-warning" role="alert">
 
-> **Q6** How would you change the colour of the categories in your phylogeny?
+> **Q7** How would you coe in a change in the colour of the categories in your phylogeny?
 
 `r if(demonstratorVersion == TRUE){"**By changing the colours (using HEX codes or R colour names) you would change the values in:**"}`
 
@@ -578,7 +594,41 @@ legend("bottomleft", legend = levels(finchSummary$beakCat), pch = 22, pt.cex = 1
 ape::nodelabels(pie = cor_margRecon$states, piecol = cols, cex = 0.5)
 ```
 
+
+<div class="alert alert-success" role="alert">
 **A small byword:** Running analyses in almost any statistical program involves transforming your data into different formats. Depending on the data and the analyses that you're doing this load can be bigger or smaller. However, doing all of these things in a single program and a single script is really very convenient. I don't expect you to remember or understand all of my data manipulations but, trust me, keep these pracs with you and the code may very well come in handy for the future. *This is how I got started with R.*
+
+I'm saying, save the URL for the pracs (I'll try and keep it alive) or better yet, save these pages as a PDF!
+
+</div>
+
+# Your homework
+
+<div class="alert alert-warning" role="alert">
+
+**Attention:**
+It is now the end of Week 4 (next week), I want you to have the data that you mentioned in Question 12; prac 2. You will need to show this to your demonstrator. I have re-phrased this below:
+
+> **Q12; prac 2:** Show your demonstrator...
+>
+>  - taxon that's interesting to you;
+>  - The number of species in that group; 
+>  - The appropriate number of **ALIGNED** sequences (for 7 = 30 species/subspecies);
+>  - and what gene region you have chosen?
+
+What if you don't have these data to show now? Well, we will be very concerned about you. We might frown at you and give you a gentle admonishment. If you're lucky, we'll help you to find the data but **don't expect us to stay late if you haven't reached out for help early.**
+
+</div>
+
+<div class="alert alert-danger" role="alert">
+
+**Attention:**
+
+I have more homework for you. By next week, at the minimum, I want you to **have your trait data** and to have attempted to **align it with your phylogenetic data** and **have it plotted**.
+
+The further along you are, the better we will be able to help you. **Remember**, we only have so long in the prac class and there are only so many demonstrators. We won't be able to give you our undivided attention (*I'm sorry, I'd really like to be able to!*), so please come as prepared as you can but don't be afraid to ask for help with genuine problems. I know that this assignment can be challenging and that's why we have a whole prac time available to seek help.
+
+</div>
 
 # What's coming next week?
 
@@ -587,6 +637,7 @@ Next week we will be talking about your assignment and providing help with the f
 We will be available to help talk you through hypotheses and analyses. It will be a great opportunity to get support on the first component of your assignment and a head start on the following component.
 
 **Be certain to save your R script from this week to help you with your assignment!**
+
 
 # A reminder of the assignment guidelines
 

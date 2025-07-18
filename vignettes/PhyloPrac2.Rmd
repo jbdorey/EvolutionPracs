@@ -430,7 +430,7 @@ Okay, I've given you the tools that you'll need to choose a taxonomic group and 
   
 There are plenty more. So, choose your taxon and have a look at what's available! Especially this initial search might be better done using the online version of GenBank
 
-<div class="alert alert-warning" role="alert">
+<div class="alert alert-danger" role="alert">
 
 > **Q12:** What is a...
 >
@@ -447,6 +447,13 @@ There are plenty more. So, choose your taxon and have a look at what's available
 Next week, we will be putting the genetic data that we gather this week together! We will begin with aligning the sequences together and then we will begin phylogenetic inference (making phylogenetic trees). So, do try and make sure you've got something for next week. Even if it's for just Darwin's finches.
 
 **Be certain to save your R script from this week to help you next week!** If you don't, well... sounds like you've got some catching up to do.
+
+<div class="alert alert-warning" role="alert">
+
+**Attention:**
+By the end of Week 4, I want you to have the data that you mentioned in Question 12. You will need to show this to your demonstrator.
+
+</div>
 
 
  \

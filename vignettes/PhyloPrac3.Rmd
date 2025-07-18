@@ -604,13 +604,31 @@ Listen... I'm not entirely without compassion. Sometimes doing stuff in R might 
 
 I have already given you a way to manually download your data from GenBank. There are also more manual/GUI ways to align sequences and to build trees! In fact, these are broadly implemented as can still be a good way to learn and certainly can be a good way to do science. *I just tend to prefer offering you a way to do everything in one place.*
 
-With this in mind, I have also built a tutorial to help you align sequences and build a tree using a simple enough GUI program called Molecular Evolutionary Genetics Analysis (**MEGA**). This program can be downloaded [**here**](https://www.megasoftware.net). The tutorial is located [here](https://jbdorey.github.io/EvolutionPracs/articles/MEGA_tutorial.html)).
+With this in mind, I have also built a tutorial to help you align sequences and build a tree using a simple enough GUI program called Molecular Evolutionary Genetics Analysis (**MEGA**). This program can be downloaded [**here**](https://www.megasoftware.net). The tutorial is located [**here**](https://jbdorey.github.io/EvolutionPracs/articles/MEGA_tutorial.html).
+
+# Your homework
+
+
+<div class="alert alert-danger" role="alert">
+
+**Attention:**
+By the end of Week 4 (next week), I want you to have the data that you mentioned in Question 12; prac 2. You will need to show this to your demonstrator. I have re-phrased this below:
+
+> **Q12; prac 2:** Show your demonstrator...
+>
+>  - taxon that's interesting to you;
+>  - The number of species in that group; 
+>  - The appropriate number of **ALIGNED** sequences (for 7 = 30 species/subspecies);
+>  - and what gene region you have chosen?
+
+</div>
 
 # What's coming next week?
 
 Next week we will be focusing on doing something interesting and useful with our phylogeny! We will be starting to think about harvesting ecological, phenotypic, or biogeographic data to test a macro-evolutionary hypothesis using your phylogeny. We will be using Darwin's finches once again but you should be advanced enough to have at the very least an idea of what group you will examine for your project.
 
 **Be certain to save your R script from this week to help you next week!** If you don't, well... sounds like you've got some catching up to do.
+
 
 
  \

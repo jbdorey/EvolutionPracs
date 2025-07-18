@@ -121,6 +121,18 @@ lapply(c(CRAN_packageList, "Biostrings", "msa"),
        library, character.only = TRUE)
 ```
 
+# Last week's homework
+
+<div class="alert alert-warning" role="alert">
+
+**Attention:**
+
+Last week I wanted you to, at the minimum, **have your trait data** and to have attempted to **align it with your phylogenetic data** and **have it plotted**. Hopefully you're at that point. So long as you have your trait data, I will be satisfied and I won't try to attempt to summon demons upon your code.
+
+The further along you are, the better we will be able to help you. **Remember**, we only have so long in the prac class and there are only so many demonstrators. We won't be able to give you our undivided attention (*I'm sorry, I'd really like to be able to!*), so please come as prepared as you can but don't be afraid to ask for help with genuine problems. I know that this assignment can be challenging and that's why we have a whole prac time available to seek help.
+
+</div>
+
 # Do my genetic data relate to my trait?
 I've driven this home a few times already, so have a look at the last two prac intros for example, but... We will not be linking traits directly to our genetic variants/mutations. This is possible but extremely complicated and usually done in *genome-wide association studies*. Bugger that, I say. Instead, we will: 
 
