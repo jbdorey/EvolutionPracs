@@ -23,9 +23,9 @@ navbar:
       href: articles/PhyloPrac2.html
     - text: Evolution Prac 3 — Aligning genetic data and building phylogenies in R
       href: articles/PhyloPrac3.html
-    - text: Evolution prac 4 — Macroevolutionary questions!
+    - text: Evolution Prac 4 — Macroevolutionary questions!
       href: articles/PhyloPrac4.html
-    - text: Evolution prac 5 — Tips and pitfalls
+    - text: Evolution Prac 5 — Tips and pitfalls
       href: articles/PhyloPrac5.html
     - text: Evolution Prac MEGA supplement — Using MEGA to align sequences and build trees
       href: articles/MEGA_tutorial.html
