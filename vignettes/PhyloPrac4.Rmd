@@ -607,9 +607,9 @@ I'm saying, save the URL for the pracs (I'll try and keep it alive) or better ye
 <div class="alert alert-warning" role="alert">
 
 **Attention:**
-It is now the end of Week 4 (next week), I want you to have the data that you mentioned in Question 12; prac 2. You will need to show this to your demonstrator. I have re-phrased this below:
+It is now the end of Week 4 (next week), I want you to have the data that you mentioned in Question 11; prac 2. You will need to show this to your demonstrator. I have re-phrased this below:
 
-> **Q12; prac 2:** Show your demonstrator...
+> **Q11; prac 2:** Show your demonstrator...
 >
 >  - taxon that's interesting to you;
 >  - The number of species in that group; 

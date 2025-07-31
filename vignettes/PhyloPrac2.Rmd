@@ -202,9 +202,9 @@ Let us click on "Passeriformes MHC class IIB antigen pseudogene, partial sequenc
 
 >**Q7:** What does the fasta file look like and what information does it contain?
 
-</div>
-
 `r if(demonstratorVersion == TRUE){"**The file, called 'sequence.fasta' contains the individuals' name and potentially other information after a greater than symbol, '>'. '>AY064447.1 Loxigilla noctis isolate LonoC62i3 MHC class IIB antigen gene, exon 2 and partial cds'. And then the sequence itself starting on a new line 'ACGGAGAAGGTGAGGCTCGTGGAGAGGTACATCTACAACCGGCAGCAGTACGTGATGTTCGACAGCGACGTGGGGCACTACGTGGGATTCACCCCCTTTGGAGAGAAACAGGCCCGGCACTGGAACAGCAGCCCGGCCAGACTGAAGTACATGCGGGCTGCGGTGGACACGCTCTGCCGGTACAACTACGAGGTGTTCCGCCCGTTCACCGTGGAGCGCCGAGGTGAGCGCGGGGCAGAGCGTGTCCCCTCGGGCCCTGCCCTGCCAGTGACCATCCCAGTCAATCCCAGTCCCTACCAG'**"}`
+
+</div>
 
 Fasta files are one of the most commonly used formats for genetic data. They are nice and simple files that are essentially just plain text that store two data types (**Q7**). Their simplicity makes them powerful and easy to understand.
 
@@ -309,6 +309,7 @@ Let us say that we are novices and we don't know what a function can or should d
 ```{r EntrexSearch1, include = TRUE,  eval = demonstratorVersion}
 # Access the help file for the function entrez_search
 ?entrez_search
+
 ```
 
 Here you will see with a bunch of information to hopefully help you understand and use the function! 
@@ -316,6 +317,8 @@ Here you will see with a bunch of information to hopefully help you understand a
 <div class="alert alert-warning" role="alert">
 
 > **Q9:** What does the help file say under the "**Description**"? 
+
+`r if(demonstratorVersion == TRUE){"**Search a given NCBI database with a particular query.**"}`
 
 </div>
 
@@ -432,7 +435,7 @@ There are plenty more. So, choose your taxon and have a look at what's available
 
 <div class="alert alert-danger" role="alert">
 
-> **Q12:** What is a...
+> **Q11:** What is a...
 >
 >  - taxon that's interesting to you;
 >  - that might have an appropriate number of species; 

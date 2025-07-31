@@ -612,9 +612,9 @@ With this in mind, I have also built a tutorial to help you align sequences and 
 <div class="alert alert-danger" role="alert">
 
 **Attention:**
-By the end of Week 4 (next week), I want you to have the data that you mentioned in Question 12; prac 2. You will need to show this to your demonstrator. I have re-phrased this below:
+By the end of Week 4 (next week), I want you to have the data that you mentioned in Question 11; prac 2. You will need to show this to your demonstrator. I have re-phrased this below:
 
-> **Q12; prac 2:** Show your demonstrator...
+> **Q11; prac 2:** Show your demonstrator...
 >
 >  - taxon that's interesting to you;
 >  - The number of species in that group; 
