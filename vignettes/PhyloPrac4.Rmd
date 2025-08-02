@@ -576,7 +576,7 @@ That's a pretty cool plot, I think. It shows the probability at each node that t
 
 <div class="alert alert-warning" role="alert">
 
-> **Q7** How would you coe in a change in the colour of the categories in your phylogeny?
+> **Q7** How would you code in a change in the colour of the categories in your phylogeny?
 
 `r if(demonstratorVersion == TRUE){"**By changing the colours (using HEX codes or R colour names) you would change the values in:**"}`
 
