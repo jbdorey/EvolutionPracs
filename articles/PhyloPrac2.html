@@ -75,7 +75,7 @@
                         <h4 data-toc-skip class="author">Dr James B
 Dorey and Dr Damien Esquerré, University of Wollongong</h4>
             
-            <h4 data-toc-skip class="date">Version 2025-08-02; practical
+            <h4 data-toc-skip class="date">Version 2025-08-06; practical
 2025-08-08</h4>
       
 
@@ -248,23 +248,24 @@ GenBank gives the citation to you.</p>
 <span class="header-section-number">2.1</span> Searching a
 taxon<a class="anchor" aria-label="anchor" href="#searching-a-taxon"></a>
 </h3>
-<p>Under <strong>Genes</strong>, let’s click on <strong>PopSet</strong>.
-Here you will see a whole bunch of single gene region extracts from
-finches of this species, information about the gene that has been
-sequenced (e.g., MHC class IIB antigen pseudogene, cytochrome b,
-ornithine decarboxylase, and other stupid gene names…), and information
-about those extracts. Underneath there is more information to help you
-decide what you might like to look at, such as the number of sequences
-provided and the type of study.</p>
+<p>Under <strong>Genomes</strong>, let’s click on
+<strong>Nucleotide</strong>. Here you will see a whole bunch of single
+gene region extracts from finches of this species, information about the
+gene that has been sequenced (e.g., mitochondrial control region,
+cytochrome b, class IIB antigen gene, cytochrome b (cytb), and other
+stupid gene names…), and information about those extracts. Underneath
+there is more information to help you decide what you might like to look
+at, such as the number of sequences provided and the type of study.</p>
 <div class="float">
-<img src="Media_EP2/Screenshot%202024-06-06%20at%2010.03.05%20am.png" alt="The search results from GenBank for the finch, “Geospiza conirostris”."><div class="figcaption">The search results from GenBank for the finch,
+<img src="Media_EP2/GenbankSearchPage.png" alt="The search results from GenBank for the finch, “Geospiza conirostris”."><div class="figcaption">The search results from GenBank for the finch,
 “<em>Geospiza conirostris</em>”.</div>
 </div>
-<p>Let us click on “Passeriformes MHC class IIB antigen pseudogene,
-partial sequence.” and look a little closer.</p>
+<p>Let us click on “Geospiza conirostris strain DR81*111 mitochondrial
+control region, partial sequence” and look a little closer.</p>
 <div class="alert alert-warning" role="alert">
 <blockquote>
-<p><strong>Q3:</strong> How many sequences are in this alignment?</p>
+<p><strong>Q3:</strong> There are sequences from how many individuals in
+this dataset??</p>
 </blockquote>
 </div>
 <div class="alert alert-warning" role="alert">
@@ -275,19 +276,17 @@ of the study that produced these genes and shared them on GenBank?</p>
 </div>
 <div class="alert alert-warning" role="alert">
 <blockquote>
-<p><strong>Q5:</strong> For the gene with the accession number
-“<em>AY064447.1</em>”, click on that number and tell us, what are the
-first 10 basepairs for the sequence? <em>HINT: have a look down the
-bottom of the page.</em></p>
+<p><strong>Q5:</strong> What are the first 10 basepairs for the
+sequence? <em>HINT: have a look down the bottom of the page.</em></p>
 </blockquote>
 </div>
 <div class="alert alert-warning" role="alert">
 <blockquote>
-<p><strong>Q6:</strong> On the alignment page, can you find and download
-the entire alignment with all sequnces in a <strong>FASTA</strong>
-format? <em>HINT: search the page for “FASTA” and click on that link; on
-that page at the top right use the “Send to:” drop down to select “File”
-and then click “Create File”.</em></p>
+<p><strong>Q6:</strong> On the page, can you find and download the
+entire sequence in a <strong>FASTA</strong> format? <em>HINT: search the
+page for “FASTA” and click on that link; on that page at the top right
+use the “Send to:” drop down to select “File” and then click “Create
+File”.</em></p>
 </blockquote>
 </div>
 <div class="alert alert-warning" role="alert">
@@ -357,20 +356,26 @@ the four genera, so we can enclose the gene name and then all of the
 genera, separated by an “<strong>AND</strong>” to specify this. Go ahead
 and make this change or paste the below query into the search bar.</p>
 <blockquote>
-<p>“<strong>(</strong>cytb[Gene Name]<strong>)</strong>
-<strong>AND</strong> <strong>(</strong>”Geospiza”[Organism]) OR
-“Camarhynchus”[Organism] OR “Certhidea”[Organism]<strong>)</strong>”</p>
+<p>“<strong>(</strong>cytB[Gene Name]<strong>) AND
+(</strong>Geospiza[Organism] OR Cactospiza[Organism] OR
+Camarhynchus[Organism] OR Certhidea[Organism]<strong>)</strong>”</p>
 </blockquote>
-<p>Now, you’ll see that there are some crazy genetic materials in there
-including genomic data (genes from in the cell nucleus). On the
-left-hand side there’s a filter that you can choose called
-“<strong>Mitochondrion</strong>” (search for it on the page if you
-need). Click on that and you’ll see that what’s mostly left are a bunch
-of 800 to 1,120 basepair sequences. But, there are also some much long
-full mitogenomes (&gt;16,000 bp) and sequences of different lengths
+<p>Now, you’ll see that there are some crazy genetic materials in there.
+Previously this has included genomic data (genes from in the cell
+nucleus). On the left-hand side there’s a filter that you can choose
+called “<strong>Mitochondrion</strong>” (search for it on the page if
+you need). Click on that and you’ll see that what’s mostly left are a
+bunch of 800 to 1,120 basepair sequences. But, there are also some much
+long full mitogenomes (&gt;16,000 bp) and sequences of different lengths
 (probably differing due to the sequencing and filtering methods used in
 their production). You may also note that “<em>AND
 mitochondrion[filter]</em>” was also added to the search query.</p>
+<blockquote>
+<p>Our final search term becomes “(cytb[Gene Name]) AND
+(Geospiza[Organism]) OR Camarhynchus[Organism] OR Certhidea[Organism])
+<strong>AND (mitochondrion[filter])</strong>”Give that a search and note
+the number of sequences.</p>
+</blockquote>
 </div>
 <div class="section level3" number="2.3">
 <h3 id="download-sequence-data-from-the-browser">
@@ -470,7 +475,7 @@ Camarhynchus[Organism] OR Certhidea[Organism]) AND
 <code class="sourceCode R"><span><span class="va">myFirstSearch</span> <span class="op">&lt;-</span> <span class="fu">rentrez</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_search.html" class="external-link">entrez_search</a></span><span class="op">(</span>db <span class="op">=</span> <span class="st">"nucleotide"</span>,</span>
 <span>              term <span class="op">=</span> <span class="st">"(cytb[Gene Name]) AND (Geospiza[Organism]) OR Camarhynchus[Organism] </span></span>
 <span><span class="st">              OR Certhidea[Organism]) AND (mitochondrion[filter])"</span>,</span>
-<span>                <span class="co"># With this new search term, I can see 171 sequences, which is enough for me to</span></span>
+<span>                <span class="co"># With this new search term, I can see 232 sequences, which is enough for me to</span></span>
 <span>                <span class="co"># download, I think! So, I'll set this in retmax</span></span>
 <span>              retmax <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span>
 <span></span>
