@@ -161,18 +161,18 @@ We are *also* going to access genetic data from GenBank using R. However, I thin
 This search should return something like the below (**Fig. 2**). Now, there's quite a lot to see there and GenBank has broken it down into the literature sources and citations (which is very helpful!). It also provides data in the form of genomes from various sources, genes, genetic data associated with health issues ("*Clinical*"), and proteins. Basically, GenBank is seeking to be able to host and share a whole bunch of molecular data with anyone who wants to use it. Great open science! **Just remember, when you use these data you must cite the original source!** Good thing that GenBank gives the citation to you.
 
 ## Searching a taxon
-Under **Genes**, let's click on **PopSet**. Here you will see a whole bunch of single gene region extracts from finches of this species, information about the gene that has been sequenced (e.g., MHC class IIB antigen pseudogene, cytochrome b, ornithine decarboxylase, and other stupid gene names...), and information about those extracts. Underneath there is more information to help you decide what you might like to look at, such as the number of sequences provided and the type of study. 
+Under **Genomes**, let's click on **Nucleotide**. Here you will see a whole bunch of single gene region extracts from finches of this species, information about the gene that has been sequenced (e.g., mitochondrial control region, cytochrome b, class IIB antigen gene, cytochrome b (cytb), and other stupid gene names...), and information about those extracts. Underneath there is more information to help you decide what you might like to look at, such as the number of sequences provided and the type of study. 
 
-![The search results from GenBank for the finch, "*Geospiza conirostris*".](Media_EP2/Screenshot 2024-06-06 at 10.03.05 am.png)
+![The search results from GenBank for the finch, "*Geospiza conirostris*".](Media_EP2/GenbankSearchPage.png)
 
 
-Let us click on "Passeriformes MHC class IIB antigen pseudogene, partial sequence." and look a little closer.
+Let us click on "Geospiza conirostris strain DR81*111 mitochondrial control region, partial sequence" and look a little closer.
 
 <div class="alert alert-warning" role="alert">
 
->**Q3:** How many sequences are in this alignment?
+>**Q3:** There are sequences from how many individuals in this dataset??
 
-`r if(demonstratorVersion == TRUE){"**There are 17 sequences, at the time of me writing this**"}`
+`r if(demonstratorVersion == TRUE){"**There are data from only one specimen.**"}`
 
 </div>
 
@@ -180,21 +180,21 @@ Let us click on "Passeriformes MHC class IIB antigen pseudogene, partial sequenc
 
 >**Q4:** What is the *title* and *journal* of the study that produced these genes and shared them on GenBank?
 
-`r if(demonstratorVersion == TRUE){"**The title is 'Evolution of Mhc class II B genes in Darwin's finches and their closest relatives: birth of a new gene.' AND the journal 'Immunogenetics'**"}`
+`r if(demonstratorVersion == TRUE){"**The title is 'Phylogeny of Darwin's finches as revealed by mtDNA sequences' AND the journal 'Proc. Natl. Acad. Sci. U.S.A. — PNAS'**"}`
 
 </div>
 
 <div class="alert alert-warning" role="alert">
 
->**Q5:** For the gene with the accession number "*AY064447.1*", click on that number and tell us, what are the first 10 basepairs for the sequence? *HINT: have a look down the bottom of the page.*
+>**Q5:** What are the first 10 basepairs for the sequence? *HINT: have a look down the bottom of the page.*
 
-`r if(demonstratorVersion == TRUE){"**The first ten basepairs are 'acggagaagg'**"}`
+`r if(demonstratorVersion == TRUE){"**The first ten basepairs are 'atagccaacg'**"}`
 
 </div>
 
 <div class="alert alert-warning" role="alert">
 
->**Q6:** On the alignment page, can you find and download the entire alignment with all sequnces in a **FASTA** format? *HINT: search the page for "FASTA" and click on that link; on that page at the top right use the "Send to:" drop down to select "File" and then click "Create File".*
+>**Q6:** On the page, can you find and download the entire sequence in a **FASTA** format? *HINT: search the page for "FASTA" and click on that link; on that page at the top right use the "Send to:" drop down to select "File" and then click "Create File".*
 
 </div>
 
@@ -202,7 +202,7 @@ Let us click on "Passeriformes MHC class IIB antigen pseudogene, partial sequenc
 
 >**Q7:** What does the fasta file look like and what information does it contain?
 
-`r if(demonstratorVersion == TRUE){"**The file, called 'sequence.fasta' contains the individuals' name and potentially other information after a greater than symbol, '>'. '>AY064447.1 Loxigilla noctis isolate LonoC62i3 MHC class IIB antigen gene, exon 2 and partial cds'. And then the sequence itself starting on a new line 'ACGGAGAAGGTGAGGCTCGTGGAGAGGTACATCTACAACCGGCAGCAGTACGTGATGTTCGACAGCGACGTGGGGCACTACGTGGGATTCACCCCCTTTGGAGAGAAACAGGCCCGGCACTGGAACAGCAGCCCGGCCAGACTGAAGTACATGCGGGCTGCGGTGGACACGCTCTGCCGGTACAACTACGAGGTGTTCCGCCCGTTCACCGTGGAGCGCCGAGGTGAGCGCGGGGCAGAGCGTGTCCCCTCGGGCCCTGCCCTGCCAGTGACCATCCCAGTCAATCCCAGTCCCTACCAG'**"}`
+`r if(demonstratorVersion == TRUE){"**The file, called 'sequence.fasta' contains the individuals' name and potentially other information after a greater than symbol, '>'. '>AY064447.1 Loxigilla noctis isolate LonoC62i3 MHC class IIB antigen gene, exon 2 and partial cds'. And then the sequence itself starting on a new line '>AF109041.1 Geospiza conirostris strain DR81 111 mitochondrial control region, partial sequence' 'ATAGCCAACGTCATACGTCATGCCCCTCCACCAAAAGCCCAAACATTATCTCCAAAACGGACCTCATTCGGCCAACACACCTACCAGGCACATTCTTGCTTCAGGTACCATATAGCCCAAATGCGTCTACCTACAGCCAAGCCGCAAGCGTCACCCAAAGACCCAGGAACTTATCTACTATACACACTTCCCAACCTCGGAAACGACTATTGTCACAGTACACCTTTGAATTCCCCTAGTCTACTGAATTCGCCCACCTCCTAGGTACGATTCTTCACCAACAGCCTTCAAGCACTCCCAAGCCAGAGGACATGGTTATCTATTGATCGCGCTTCTCACGAGAACCGAGCTACTCAACGTCTAAAGTACCCTACGTTATTGCCCTGCAGGCGCATACATCTCCTAACCTTGCTCTTTTGCGCTATTGGTTGTAACTTCAGGAACATACCTGACGAATTCCCTCCTCCTTGCTCTTCACAGATACAAGTGGTCGGTTGAATACTCCTCCCTATTCTCATTATTTCGGCATACCGACCTCTTACACTTGTTTTTTCTTAGCGTCTCTTCAATAAACCCCTCAAGTGCAGAGCAGGTGATATCTTCCTCTTGACATGTCCATCACATGACCGCCGAACATATGAATCCCCTAACACCCAGAATGTCATGGTTTAACGGATAAGGTCGTCGCAAACTTGGCACTGATGCACTTTGACCCCATTCATGGAGGGCGCGCTACCTACCTCTAGACAACAGATAGTGTAATGGTTGCCGGACATATTAATTATTTTATCAAATTCTAGGAATTTACATTTAAATTCCATTTTACGCATCTATTTTTTTTATCTTGACATTTTTAAAATTTTTTTATCAAACAATCAAACCATATATTCCTAGATTGTCCAAACCATTCACCATCAACATTTACAACTTACTTTCCTCTACATTTCCTGCTAACATAAAACAACAACTAACCATCATCACCACCATATTTTTCCCCCCCCTTTTCCCCTACCCCACACAAAACAGCCCTTACAAAAACCAAACAAAAATACAAACCATGACACCAAACCACCAAAGGAACCCCCCCCCGTTCTTGTAGCTTATAAAAAGCATGACACT'**"}`
 
 </div>
 
@@ -226,9 +226,11 @@ Go back to the [GenbBank](https://www.ncbi.nlm.nih.gov) homepage and instead of 
   
   Here you can see that our query is bounded by a bunch of confusing brackets. They are specifying the relationships between each query, but what we want is to find all cytB genes for any (**OR**) of the four genera, so we can enclose the gene name and then all of the genera, separated by an "**AND**" to specify this. Go ahead and make this change or paste the below query into the search bar.
   
-  >"**(**cytb[Gene Name]**)** **AND** **(**"Geospiza"[Organism]) OR "Camarhynchus"[Organism] OR "Certhidea"[Organism]**)**"
+  >"**(**cytB[Gene Name]**) AND (**Geospiza[Organism] OR Cactospiza[Organism] OR Camarhynchus[Organism] OR Certhidea[Organism]**)**"
   
-  Now, you'll see that there are some crazy genetic materials in there including genomic data (genes from in the cell nucleus). On the left-hand side there's a filter that you can choose called "**Mitochondrion**" (search for it on the page if you need). Click on that and you'll see that what's mostly left are a bunch of 800 to 1,120 basepair sequences. But, there are also some much long full mitogenomes (>16,000 bp) and sequences of different lengths (probably differing due to the sequencing and filtering methods used in their production). You may also note that "*AND mitochondrion[filter]*" was also added to the search query.
+  Now, you'll see that there are some crazy genetic materials in there. Previously this has included genomic data (genes from in the cell nucleus). On the left-hand side there's a filter that you can choose called "**Mitochondrion**" (search for it on the page if you need). Click on that and you'll see that what's mostly left are a bunch of 800 to 1,120 basepair sequences. But, there are also some much long full mitogenomes (>16,000 bp) and sequences of different lengths (probably differing due to the sequencing and filtering methods used in their production). You may also note that "*AND mitochondrion[filter]*" was also added to the search query.
+  
+  > Our final search term becomes "(cytb[Gene Name]) AND (Geospiza[Organism]) OR Camarhynchus[Organism] OR Certhidea[Organism]) **AND (mitochondrion[filter])**"Give that a search and note the number of sequences.
   
 ## Download sequence data from the browser
   
@@ -284,7 +286,7 @@ Let us dive right into querying GenBank in R. First, lets use `entrez_search()` 
 myFirstSearch <- rentrez::entrez_search(db = "nucleotide",
               term = "(cytb[Gene Name]) AND (Geospiza[Organism]) OR Camarhynchus[Organism] 
               OR Certhidea[Organism]) AND (mitochondrion[filter])",
-                # With this new search term, I can see 171 sequences, which is enough for me to
+                # With this new search term, I can see 232 sequences, which is enough for me to
                 # download, I think! So, I'll set this in retmax
               retmax = 200)
 
