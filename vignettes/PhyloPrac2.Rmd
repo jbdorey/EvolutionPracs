@@ -282,6 +282,8 @@ library(ape)
 ## Run a GenBank query
 Let us dive right into querying GenBank in R. First, lets use `entrez_search()` on the "nucleotide" database using our previous search term. **Note:** that we have to remove the internal quotes in the search "**term**". Use the following term: *"(cytb[Gene Name]) AND (Geospiza[Organism]) OR Camarhynchus[Organism] OR Certhidea[Organism]) AND (mitochondrion[filter])"*
 
+**Note:** Some students using PCs ran into a problem here where `rentrez::entrez_search()` didn't work. It may be that they need to install [RTools](https://cran.r-project.org/bin/windows/Rtools/) — This is ONLY for PC and not Macintosh.
+
 ```{r myFirstSearch,  eval = demonstratorVersion}
 myFirstSearch <- rentrez::entrez_search(db = "nucleotide",
               term = "(cytb[Gene Name]) AND (Geospiza[Organism]) OR Camarhynchus[Organism] 
