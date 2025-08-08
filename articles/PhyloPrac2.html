@@ -75,7 +75,7 @@
                         <h4 data-toc-skip class="author">Dr James B
 Dorey and Dr Damien Esquerré, University of Wollongong</h4>
             
-            <h4 data-toc-skip class="date">Version 2025-08-06; practical
+            <h4 data-toc-skip class="date">Version 2025-08-08; practical
 2025-08-08</h4>
       
 
@@ -471,6 +471,10 @@ internal quotes in the search “<strong>term</strong>”. Use the following
 term: <em>“(cytb[Gene Name]) AND (Geospiza[Organism]) OR
 Camarhynchus[Organism] OR Certhidea[Organism]) AND
 (mitochondrion[filter])”</em></p>
+<p><strong>Note:</strong> Some students using PCs ran into a problem
+here where <code><a href="https://docs.ropensci.org/rentrez/reference/entrez_search.html" class="external-link">rentrez::entrez_search()</a></code> didn’t work. It may be
+that they need to install <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">RTools</a> — This
+is ONLY for PC and not Macintosh.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">myFirstSearch</span> <span class="op">&lt;-</span> <span class="fu">rentrez</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_search.html" class="external-link">entrez_search</a></span><span class="op">(</span>db <span class="op">=</span> <span class="st">"nucleotide"</span>,</span>
 <span>              term <span class="op">=</span> <span class="st">"(cytb[Gene Name]) AND (Geospiza[Organism]) OR Camarhynchus[Organism] </span></span>
