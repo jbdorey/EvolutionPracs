@@ -643,7 +643,7 @@ We will be available to help talk you through hypotheses and analyses. It will b
 
 **Please check Moodle for the most-recent version**
 
-## Part (a) — preliminary phylogeny (5%)
+## Part (a) — preliminary phylogeny (10%)
 
 The idea of this component of the grant proposal assignment is to (i) demonstrate your data and phylogenetic abilities and (ii) to ensure that you have preliminary results to describe in your grant application.
 
@@ -667,7 +667,7 @@ The idea of this component of the grant proposal assignment is to (i) demonstrat
 
 **Table 1**: A description of each assignment component and what is expected to achieve a particular score for that component (total possible mark sums to five)
 
-| **C.** | **1** | **0.5** | **0** |
+| **C.** | **2** | **1** | **0** |
 |---------------|-------------------------|------------------|---------------|
 | **1a** | A phylogenetic tree of appropriate size (\>7 and \<30 tips, excluding outgroup) is provided | A phylogenetic tree of inappropriate size (\<7 or \>30 tips excluding outgroup) is provided | No phylogeny is provided |
 | **1b** | An appropriate (e.g., relative within the same family or subfamily) outgroup is provided | An inappropriate (very distant or internal relative) outgroup is provided | No outgroup is provided |
@@ -675,7 +675,7 @@ The idea of this component of the grant proposal assignment is to (i) demonstrat
 | **2b** | Trait evolution across the phylogeny is well described. For example, and if relevant to their data, the student describes how and where the trait has changed (within which clades or species); how that trait might be related to another (if another was measured); the range, mean, or median values of that trait across the phylogeny or in particular groups; etc. | Trait evolution across the phylogeny is poorly thought out and explained. The student misses major patterns in the phylogeny or describes them particularly poorly. A clever student might describe their patterns to their demonstrator or lab mates in one of the pracs prior to submission | No description of trait evolution is provided |
 | **2c** | (i) Genbank accession numbers, (ii) references to trait sources, (iii) student R code are all provided, and (iv) if MEGA was used, this is described in concise detail | Only 1–2 of the references (see left) are provided | None of the references are provided |
 
-## Part (b) — Project quality and innovation (15%)
+## Part (b) — Project quality and innovation (10%)
 
 The idea of this component of the grant proposal assignment is to (i) identify a knowledge gap and develop a well-structured and thought out hypothesis, (ii) understand and describe the novelty of your question, (iii) describe your methods and their appropriateness, and (iv) explain the importance of your project to a grant agency. We will keep in mind that the scope of your grant must be smaller than one that you would submit to ARC or to another granting agency. This means that we are interested in seeing the quality of your reasoning and writing.
 
