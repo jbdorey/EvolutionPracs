@@ -33,6 +33,7 @@ library(rmarkdown)
 library(formatR)
 library(styler)
 library(kableExtra)
+library(htmlwidgets)
 
 # Load core packages
 library(dplyr)
