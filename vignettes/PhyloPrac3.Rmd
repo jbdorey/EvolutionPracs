@@ -397,6 +397,15 @@ equalised_BioString <- Biostrings::readDNAStringSet("equalisedFasta.fasta")
 
 If you zoned out for that last section, start paying attention again here!
 
+```{r downloadmsaRData, include=FALSE}
+utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/vignettes/equalisedFasta.fasta",
+                     destfile = "equalisedFasta.fasta",
+                     method="curl")
+equalised_BioString <- Biostrings::readDNAStringSet("equalisedFasta.fasta")
+
+```
+
+
 ```{r, eval = TRUE}
 # START PAYING ATTENTION AGAIN!
 # finally, we can interactively look at our alignment!
