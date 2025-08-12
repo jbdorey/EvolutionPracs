@@ -585,7 +585,7 @@ you may not be able to get genetic data for all of those 10 species —
 and, you need genetic data that aligns (i.e., is from the same gene and
 the same part of that gene). So, maybe shoot for a few more species and
 then search for what’s available.</p>
-<p>The below function, <code><a href="https://jbdorey.github.io/BeeBDC/reference/taxadbToBeeBDC.html" class="external-link">taxadbToBeeBDC()</a></code> from the
+<p>The below function, <code><a href="https://rdrr.io/pkg/BeeBDC/man/taxadbToBeeBDC.html" class="external-link">taxadbToBeeBDC()</a></code> from the
 <strong>BeeBDC</strong> package will get taxon names from <a href="https://www.gbif.org" class="external-link">GBIF</a>, the Global Biodiversity
 Information Facility, and return a table with the valid and old names
 for each species. We will then use the <strong>dplyr</strong> package to
@@ -612,7 +612,7 @@ problems</strong>)! If these fail, ask your demonstrator.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jbdorey.github.io/BeeBDC/" class="external-link">BeeBDC</a></span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Run the BeeBDC query</span></span>
-<span><span class="va">speciesCountTable</span> <span class="op">&lt;-</span> <span class="fu">BeeBDC</span><span class="fu">::</span><span class="fu"><a href="https://jbdorey.github.io/BeeBDC/reference/taxadbToBeeBDC.html" class="external-link">taxadbToBeeBDC</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Apidae"</span>,</span>
+<span><span class="va">speciesCountTable</span> <span class="op">&lt;-</span> <span class="fu">BeeBDC</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BeeBDC/man/taxadbToBeeBDC.html" class="external-link">taxadbToBeeBDC</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Apidae"</span>,</span>
 <span>                               rank <span class="op">=</span> <span class="st">"Family"</span>,</span>
 <span>                               provider <span class="op">=</span> <span class="st">"gbif"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">taxonomic_status</span> <span class="op">==</span> <span class="st">"accepted"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -645,7 +645,7 @@ ask! It’s called a <strong>pipe</strong> and it’s from the
 function forwards (<strong>%&gt;%</strong>) into the next function. It
 is equivalent to running the below, but it’s much quicker and
 neater.</p>
-<pre><code><span>  <span class="va">BeeBDC_query</span> <span class="op">&lt;-</span> <span class="fu">BeeBDC</span><span class="fu">::</span><span class="fu"><a href="https://jbdorey.github.io/BeeBDC/reference/taxadbToBeeBDC.html" class="external-link">taxadbToBeeBDC</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Apidae"</span>,</span>
+<pre><code><span>  <span class="va">BeeBDC_query</span> <span class="op">&lt;-</span> <span class="fu">BeeBDC</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BeeBDC/man/taxadbToBeeBDC.html" class="external-link">taxadbToBeeBDC</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Apidae"</span>,</span>
 <span>                           rank <span class="op">=</span> <span class="st">"Family"</span>,</span>
 <span>                           provider <span class="op">=</span> <span class="st">"gbif"</span><span class="op">)</span> </span>
 <span>  <span class="va">BeeBDC_query</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">BeeBDC_query</span>, <span class="va">taxonomic_status</span> <span class="op">==</span> <span class="st">"accepted"</span><span class="op">)</span></span>

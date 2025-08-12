@@ -285,7 +285,7 @@ Error in loadNamespace(x) : there is no package called ‘taxadb’</code></pre>
 <em>taxadb</em> package is not installed! All you need to do is install
 it and all will be well again. <em>For further context</em>, the reason
 that this happens is because in BeeBDC, the function
-<code><a href="https://jbdorey.github.io/BeeBDC/reference/taxadbToBeeBDC.html" class="external-link">BeeBDC::taxadbToBeeBDC()</a></code> is not considered to be a core
+<code><a href="https://rdrr.io/pkg/BeeBDC/man/taxadbToBeeBDC.html" class="external-link">BeeBDC::taxadbToBeeBDC()</a></code> is not considered to be a core
 package that all users will want. To save EVERYONE from having to
 download <em>taxadb</em>, we let users choose to download it if they
 need it.</p>
@@ -296,7 +296,7 @@ need it.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"taxadb"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Run the BeeBDC query</span></span>
-<span><span class="va">speciesCountTable</span> <span class="op">&lt;-</span> <span class="fu">BeeBDC</span><span class="fu">::</span><span class="fu"><a href="https://jbdorey.github.io/BeeBDC/reference/taxadbToBeeBDC.html" class="external-link">taxadbToBeeBDC</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Apidae"</span>,</span>
+<span><span class="va">speciesCountTable</span> <span class="op">&lt;-</span> <span class="fu">BeeBDC</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BeeBDC/man/taxadbToBeeBDC.html" class="external-link">taxadbToBeeBDC</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Apidae"</span>,</span>
 <span>                               rank <span class="op">=</span> <span class="st">"Family"</span>,</span>
 <span>                               provider <span class="op">=</span> <span class="st">"gbif"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">taxonomic_status</span> <span class="op">==</span> <span class="st">"accepted"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
