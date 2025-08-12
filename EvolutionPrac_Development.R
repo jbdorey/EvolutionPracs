@@ -122,7 +122,7 @@ requiredPackages <- sort(c(
   'stringr', 'tidyselect', 
   "dplyr","forcats","lubridate",
     # Other
-  "mgsub", "igraph",
+  "mgsub", "igraph", "htmlwidgets",
     # GIS packages
   'CoordinateCleaner', 'rnaturalearth', 'sf',
     # Graphical packages
@@ -135,7 +135,7 @@ suggestedPackages <- sort(c("rlang", "xml2",  "rvest",
                             "janitor", "rnaturalearthdata", 
                             "terra", "R.utils", 
                             "testthat", "emld", "purrr", "tidyr", "galah",
-                            "classInt", "htmlwidgets",  "leaflet", "plotly", 
+                            "classInt",  "leaflet", "plotly", 
                             "bdc",
                             "ComplexHeatmap", 
                             "taxadb",

@@ -29,11 +29,11 @@ Imports:
     BiocManager,
     stringr,
     formatR,
+    htmlwidgets,
     tidyselect
 Suggests: 
     htmltools,
     tibble,
-    htmlwidgets,
     httr,
     knitr,
     magrittr,
