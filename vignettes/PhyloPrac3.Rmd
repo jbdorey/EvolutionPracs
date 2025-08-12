@@ -397,10 +397,15 @@ equalised_BioString <- Biostrings::readDNAStringSet("equalisedFasta.fasta")
 
 If you zoned out for that last section, start paying attention again here!
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 # START PAYING ATTENTION AGAIN!
 # finally, we can interactively look at our alignment!
 msaR::msaR(equalised_BioString, menu=T, overviewbox = T, labelNameLength = 200)
+
+```
+
+```{r, eval = TRUE,  include=TRUE}
+msaR::msaR(equalised_BioString, menu=F, overviewbox = F, labelNameLength = 200)
 
 ```
 
