@@ -397,12 +397,18 @@ equalised_BioString <- Biostrings::readDNAStringSet("equalisedFasta.fasta")
 
 If you zoned out for that last section, start paying attention again here!
 
+<div class="alert alert-danger" role="alert">
+**Note:**
+
+Last year, a few people had trouble displaying their alignment using **msaR**. If this is you, you might still be able to "Export" your alignment as an interactive `.html` file using the "Viewer" window in RStudio. Go `Export` > `Save as Web Page`.
+
+</div>
+
 ```{r downloadmsaRData, include=FALSE}
 utils::download.file(url = "https://raw.githubusercontent.com/jbdorey/EvolutionPracs/main/vignettes/equalisedFasta.fasta",
                      destfile = "equalisedFasta.fasta",
                      method="curl")
 equalised_BioString <- Biostrings::readDNAStringSet("equalisedFasta.fasta")
-
 ```
 
 
