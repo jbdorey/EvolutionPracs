@@ -381,6 +381,12 @@ lengthCorrectionTable <- tibble::tibble(sequence = finchSpecies_fasta) %>%
                                                       width = max(stringr::str_count(sequence))),
                   # If you want, you can check this object to see that lengths are the same
                 length2 = stringr::str_count(lengthenedSequence))
+
+# The easiest place to remove individuals from is the lengthCorrectionTable. So, let's remove the
+# SUBSPECIES names from here. But, if you want to remove other individuals in your assignment, do so
+# here! 
+lengthCorrectionTable <- lengthCorrectionTable %>%
+  dplyr::filter(!name %in% c("Camarhynchus_pallidus_pallidus_2864045949","Camarhynchus_pallidus_striatipecta_2864045941", "Camarhynchus_pallidus_productus_2864045969")  )
   
 # Now, we can turn this back into a fasta format... Asian don't worry too much about
 # this code.
@@ -586,8 +592,15 @@ phangorn::plotBS(
     phangorn::maxCladeCred() %>% 
       # We can root the tree at this point
     ape::root(outgroup = "Asemospiza_obscura_HQ153059"),
-  BStrees = bs , 
+  trees = bs , 
   p = 10, type="p", digits=2, main="Ultrafast bootstrap")
+# now we need to add in the support for/at nodes
+phangorn::add_support(tree = bs %>%
+      # Find the Maximum clade credibility tree
+    phangorn::maxCladeCred() %>% 
+      # We can root the tree at this point
+    ape::root(outgroup = "Asemospiza_obscura_HQ153059"),
+  trees = bs)
 ```
 
 <div class="alert alert-warning" role="alert">
