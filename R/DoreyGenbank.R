@@ -62,20 +62,32 @@ myCheekySearch <- rentrez::entrez_search(db = db,
                                          retmax = retmax)
 
 # Inspect the object and answer the question below
-myCheekySearch
+# myCheekySearch
 
 # What we actually need are the accession numbers form the myCheekySearch object. Let's turn this
 # vector into a list of vectors, each 200 long. I'm going to write it in the tidyverse because
 # it's easy for me, but it might not be the most concise way to do this.
-myCheekySearch_list <- myCheekySearch$ids %>% 
-  dplyr::tibble(accessionIDs = .) %>%
-  # Group by the row number and step size (200 IDs at once)
-  dplyr::group_by(group = ceiling(dplyr::row_number()/200)) %>%
-  # Split the dataset up into a list by group
-  dplyr::group_split(.keep = TRUE)
+if(!length(myCheekySearch$ids) <= chunk.size){
+  myCheekySearch_list <- myCheekySearch$ids %>% 
+    dplyr::tibble(accessionIDs = .) %>%
+    # Group by the row number and step size (200 IDs at once)
+    dplyr::group_by(group = ceiling(dplyr::row_number()/chunk.size)) %>%
+    # Split the dataset up into a list by group
+    dplyr::group_split(.keep = TRUE)
+}
+  # If number of sequences is less than chunk size, change the size 
+if(length(myCheekySearch$ids) <= chunk.size){
+    # 
+  myCheekySearch_list <- myCheekySearch$ids %>% 
+    dplyr::tibble(accessionIDs = .) %>%
+    # Group by the row number and step size (200 IDs at once)
+    dplyr::group_by(group = ceiling(dplyr::row_number()/(length(myCheekySearch$ids)/2))) %>%
+    # Split the dataset up into a list by group
+    dplyr::group_split(.keep = TRUE)
+}
 
 # You can check out any element of the list... let's look at the 2nd
-myCheekySearch_list[[2]]
+# myCheekySearch_list[[2]]
 
 if(is.null(seq.names)){
 # Now we can apply the function across a list using lapply
