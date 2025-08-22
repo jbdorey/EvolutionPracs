@@ -179,7 +179,8 @@ remotes::install_github("jbdorey/EvolutionPracs", quiet = TRUE, upgrade = "never
 exampleAssignmentDownload <- EvolPracs::DoreyGenbank(db = "nucleotide",
                      term = "(cytb[Gene Name]) AND (Apis[Organism])",
                       # The maximum number of sequences to return
-                     retmax = 500)
+                     chunk.size = 200,
+                     retmax = 2000)
 
 ```
 
