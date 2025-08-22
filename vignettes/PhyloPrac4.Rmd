@@ -401,9 +401,8 @@ Listen, I've given you a lot to think about here. I'm very pleased if you've com
 
 We will now use an awesome package called **phytools**, which was written by Liam Revell, who also wrote **Phylogenetic Comparitive Methods in R**. We can install that now.
 
-```{r installExtras, eval = demonstratorVersion}
-install.packages("phytools",
-              repos = "http://cran.us.r-project.org")
+```{r installExtras, eval = FALSE}
+install.packages("phytools")
 library(phytools)
 ```
 
@@ -516,10 +515,9 @@ tibble::tibble(
 
 Now, let's do something cool and calculate the probability that each node is large or small using *marginal ancestral state reconstruction*. We'll need another package for this — **corHMM**. *Sorry, it doesn't have a logo :(*
 
-```{r installcorHMM, include = TRUE, eval = demonstratorVersion}
+```{r installcorHMM, include = TRUE, eval = FALSE}
 # Install and load the package
-install.packages("corHMM",
-              repos = "http://cran.us.r-project.org")
+install.packages("corHMM")
 library(corHMM)
 ```
 
