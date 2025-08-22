@@ -50,6 +50,13 @@ if(demonstratorVersion == FALSE){
 #| include: FALSE
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", echo = TRUE, message=FALSE)
 
+if(demonstratorVersion == TRUE){
+options(repos = c(
+  binary = "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+  source = "https://packagemanager.rstudio.com/all/latest",
+  CRAN = "http://cran.us.r-project.org"
+))}
+
 ```
 
 
@@ -104,8 +111,7 @@ packageList <- c(
 
 # List the new (not installed) packages and then if there are any, install them.
 install.packages(pkgs = c(packageList), 
-              rebuild = FALSE,
-              repos = "http://cran.us.r-project.org")
+              rebuild = FALSE)
 ```
 
 ![](Media_EP3/tidyr.png){width="100px"}
@@ -328,12 +334,10 @@ Now we have 15 sequences; one per species in the cytB dataset on GenBank. But, t
 
 ```{r install2,  eval=FALSE}
 # Here, we'll use a package called msaR to observe and align our sequences
-install.packages("msaR",
-              repos = "http://cran.us.r-project.org")
+install.packages("msaR")
 # We also need the BiocManager to install packages from bioconductor, where many 
 # genetics packages, like Biostrings and msa, are found
-install.packages("BiocManager",
-              repos = "http://cran.us.r-project.org")
+install.packages("BiocManager")
   # you may get asked to install extra packages, select all "a"
 BiocManager::install("Biostrings")
 BiocManager::install("msa")
@@ -505,8 +509,7 @@ The *neighbour-joining* tree is nice, quick, easy, but not the most robust imple
 
 ```{r installPhangorn, eval = demonstratorVersion}
 # install and load phangorn
-install.packages("phangorn",
-              repos = "http://cran.us.r-project.org")
+install.packages("phangorn")
 library(phangorn)
 ```
 

@@ -54,7 +54,31 @@ DoreyGenbank <- function(
   quiet = TRUE,
   type = "DNA"
   ){
+  # Difficult example to return 
+#term = "(cytb[Gene Name]) AND (Naja kaouthia[Organism]) OR (Naja atra[Organism]) OR (Naja sagittifera[Organism])OR (Naja oxiana[Organism])OR (Naja sputatrix[Organism])OR (Naja samarensis[Organism])OR (Naja phillipinensis[Organism])OR (Naja mandalayensis[Organism])OR (Naja sumatrana[Organism])OR (Naja siamensis[Organism])"
 
+ # Make a functino to find and over-write the species column where it is problematic and not matching up
+ lengthTestFun <- function(inData = NULL){
+   if(length(attributes(inData)$description) != length(attributes(inData)$species)){
+     lengthTibble <- #dplyr::tibble(species = attributes(inData)$species) %>%
+        # Extract some attributes data, including using the "species" slot to extract the species
+       # names that remain
+       dplyr::tibble(
+         names = attributes(inData)$names,
+         sp_desc = stringr::str_extract(string = attributes(inData)$description,
+                                        pattern = paste0(unique(
+                                          c(attributes(inData)$species,
+                                            attributes(inData)$species %>% 
+                                              stringr::str_replace_all("_", " "))),
+                                          collapse = "|")),
+         desc = attributes(inData)$description)
+     # Over-write the species column
+     attributes(inData)$species <- lengthTibble$sp_desc
+   }
+   # Return the data 
+   return(inData)
+   }
+ 
 myCheekySearch <- rentrez::entrez_search(db = db,
                                          term = term,
                                          # With this new search term, I can see 171 sequences, which is enough for me to
@@ -101,8 +125,14 @@ GenBank_list <- myCheekySearch_list %>%
   lapply(
     # The data to feed into the function
     X = .,
-    FUN = ape::read.GenBank)
+    FUN = ape::read.GenBank) %>%
+  lapply(
+    X = .,
+    FUN = lengthTestFun
+  )
 }
+
+
 
 if(!is.null(seq.names)){
   GenBank_list <- seq.names
