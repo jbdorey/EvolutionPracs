@@ -60,6 +60,7 @@ DoreyGenbank <- function(
  # Make a functino to find and over-write the species column where it is problematic and not matching up
  lengthTestFun <- function(inData = NULL){
    if(length(attributes(inData)$description) != length(attributes(inData)$species)){
+     spVect <- attributes(inData)$species
      lengthTibble <- #dplyr::tibble(species = attributes(inData)$species) %>%
         # Extract some attributes data, including using the "species" slot to extract the species
        # names that remain
@@ -67,8 +68,8 @@ DoreyGenbank <- function(
          names = attributes(inData)$names,
          sp_desc = stringr::str_extract(string = attributes(inData)$description,
                                         pattern = paste0(unique(
-                                          c(attributes(inData)$species,
-                                            attributes(inData)$species %>% 
+                                          c(spVect[order(nchar(spVect), decreasing = TRUE, spVect)],
+                                            spVect[order(nchar(spVect), decreasing = TRUE, spVect)] %>% 
                                               stringr::str_replace_all("_", " "))),
                                           collapse = "|")),
          desc = attributes(inData)$description)
