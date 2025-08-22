@@ -84,8 +84,7 @@ We should already have the packages from last week installed.
 
 ```{r installPackages, message=FALSE, warning=FALSE, results=FALSE, collapse = TRUE, eval = demonstratorVersion}
 #  A tidyverse package for reading in Excel sheets
-install.packages("readxl",
-              repos = "http://cran.us.r-project.org")
+install.packages("readxl")
 ```
 
 ![](Media_EP4/readxl.png){width="100px"}
