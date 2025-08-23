@@ -42,7 +42,7 @@ DoreyGenbank <- function(
     # rentrez::entrez_search terms  
   db = "nucleotide",
   term = "(cytb[Gene Name]) AND (Apis[Organism])",
-  retmax = 2000,
+  retmax = 2100,
   config = NULL,
   retmode = "xml",
   use_history = FALSE,
@@ -50,7 +50,7 @@ DoreyGenbank <- function(
   seq.names = NULL,
   species.names = TRUE,
   as.character = FALSE, 
-  chunk.size = 200, 
+  chunk.size = 250, 
   quiet = TRUE,
   type = "DNA"
   ){
