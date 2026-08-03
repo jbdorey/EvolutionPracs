@@ -13,8 +13,8 @@
     }
   };
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Evolution prac 4 — Macroevolutionary questions!">
 </head>
@@ -75,8 +75,8 @@
                         <h4 data-toc-skip class="author">Dr James B
 Dorey and Dr Damien Esquerré, University of Wollongong</h4>
             
-            <h4 data-toc-skip class="date">Version 2025-08-23; practical
-2025-08-22</h4>
+            <h4 data-toc-skip class="date">Version 2026-08-03; practical
+2026-08-21</h4>
       
 
       <div class="d-none name"><code>PhyloPrac4.Rmd</code></div>
@@ -193,7 +193,7 @@ see where this is</em>). Let’s go ahead and read it into R.</p>
 <span>    <span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/root.html" class="external-link">root</a></span><span class="op">(</span>outgroup <span class="op">=</span> <span class="st">"Asemospiza obscura"</span><span class="op">)</span>,</span>
 <span>  p <span class="op">=</span> <span class="fl">10</span>, type<span class="op">=</span><span class="st">"p"</span>, digits<span class="op">=</span><span class="fl">2</span>, main<span class="op">=</span><span class="st">"Ultrafast bootstrap"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="PhyloPrac4_files/figure-html/readFasta-1.png" width="672"></p>
+<p><img src="PhyloPrac4_files/figure-html/readFasta-1.png" alt="" width="672"></p>
 <pre><code><span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Phylogenetic tree with 15 tips and 11 internal nodes.</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -439,7 +439,7 @@ variation.</p>
 <span><span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/nodelabels.html" class="external-link">nodelabels</a></span><span class="op">(</span><span class="va">treeML_dropped</span><span class="op">$</span><span class="va">node.label</span>, bg <span class="op">=</span> <span class="st">"white"</span>, frame <span class="op">=</span> <span class="st">"circle"</span>, cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">treeML_fixed</span>, main <span class="op">=</span> <span class="st">"New plot"</span>, sub <span class="op">=</span> <span class="st">"now with tiny branches added"</span>, </span>
 <span>     col.sub <span class="op">=</span> <span class="st">"darkred"</span>, cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="PhyloPrac4_files/figure-html/picCorrection-1.png" width="672"></p>
+<p><img src="PhyloPrac4_files/figure-html/picCorrection-1.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Return R's plots to a single one! </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -525,7 +525,7 @@ variable<a class="anchor" aria-label="anchor" href="#continuous-variable"></a>
 <span>                     interactive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     shape <span class="op">=</span> <span class="st">"circle"</span>,</span>
 <span>                     cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="PhyloPrac4_files/figure-html/fastAnc-1.png" width="672"></p>
+<p><img src="PhyloPrac4_files/figure-html/fastAnc-1.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  </span>
 <span><span class="co"># We can also use phytools to map this evolution as a continuous trait along</span></span>
@@ -534,7 +534,7 @@ variable<a class="anchor" aria-label="anchor" href="#continuous-variable"></a>
 <span>  <span class="fu">phytools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/setMap.html" class="external-link">setMap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"orange"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Plot the tree</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">plotMap</span>, leg.txt <span class="op">=</span> <span class="st">"Median beak height (mm)"</span>, fsize <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
-<p><img src="PhyloPrac4_files/figure-html/fastAnc-2.png" width="672"></p>
+<p><img src="PhyloPrac4_files/figure-html/fastAnc-2.png" alt="" width="672"></p>
 <p>Hey, look at that! There are very few species with high beaks, and
 they are mostly grouped in one genus, <em>Geospiza</em>! That’s
 cool.</p>
@@ -574,7 +574,7 @@ categorical data for my assignment?</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See the histogram of species median beak height</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">$</span><span class="va">medianBH</span>, breaks <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
-<p><img src="PhyloPrac4_files/figure-html/categorical%20reconstruction-1.png" width="672"></p>
+<p><img src="PhyloPrac4_files/figure-html/categorical%20reconstruction-1.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Make this into a categorical variable using an if-else statement</span></span>
@@ -687,7 +687,7 @@ taking 1 away so that it starts at zero.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"bottomleft"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Factor-class.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">finchSummary</span><span class="op">$</span><span class="va">beakCat</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">22</span>, pt.cex <span class="op">=</span> <span class="fl">1.5</span>,</span>
 <span>       pt.bg <span class="op">=</span> <span class="va">cols</span>, bty <span class="op">=</span> <span class="st">"n"</span>, cex <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="fu">ape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/nodelabels.html" class="external-link">nodelabels</a></span><span class="op">(</span>pie <span class="op">=</span> <span class="va">cor_margRecon</span><span class="op">$</span><span class="va">states</span>, piecol <span class="op">=</span> <span class="va">cols</span>, cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="PhyloPrac4_files/figure-html/marginalReconstruct-1.png" width="672"></p>
+<p><img src="PhyloPrac4_files/figure-html/marginalReconstruct-1.png" alt="" width="672"></p>
 <p>That’s a pretty cool plot, I think. It shows the probability at each
 node that the ancestral state there was large or small. It also shows
 the state in the present day! You can see that, in this case, the
@@ -943,7 +943,7 @@ knowledge/theory (<strong>not a research question!</strong>)</p>
 <li>Provide a hypothesis that will help you test and address the
 knowledge gap. Hypotheses, rather than research questions, are
 explicitly testable (i.e. an expected and alternative outcome is clear).
-For example, “<em>The relationship between A and B will be C</em>”. Or,
+For example, “<em>The relationship between A and B will be C</em> ”. Or,
 from our pracs was “<em>Finches with larger beak heights will have
 larger beak height ranges than finches with smaller beak heights</em>”.
 This is compared with a research question like “<em>We will examine how
@@ -1116,7 +1116,7 @@ today<a class="anchor" aria-label="anchor" href="#new-packages-used-today"></a>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
