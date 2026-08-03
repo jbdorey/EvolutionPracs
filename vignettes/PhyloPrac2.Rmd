@@ -1,7 +1,7 @@
 ---
 title: "Evolution Prac 2 — Access genetic data from GenBank"
 author: Dr James B Dorey and Dr Damien Esquerré, University of Wollongong
-date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2025-08-08"
+date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2026-08-07"
 output: 
    rmarkdown::html_document:
     toc: true
@@ -166,7 +166,7 @@ Under **Genomes**, let's click on **Nucleotide**. Here you will see a whole bunc
 ![The search results from GenBank for the finch, "*Geospiza conirostris*".](Media_EP2/GenbankSearchPage.png)
 
 
-Let us click on "Geospiza conirostris strain DR81*111 mitochondrial control region, partial sequence" and look a little closer.
+Let us **view 200 results per page (up the top)** and then find and click on "Geospiza conirostris strain DR81*111 mitochondrial control region, partial sequence" and look a little closer.
 
 <div class="alert alert-warning" role="alert">
 
@@ -301,7 +301,7 @@ myFirstSearch
 
 > **Q8:** How many search results were found and does that number seem familiar?
 
-`r if(demonstratorVersion == TRUE){"**As of July 2025, I see 232 hits**"}`
+`r if(demonstratorVersion == TRUE){"**As of Aug 2026, I see 232 hits**"}`
 
 </div>
 

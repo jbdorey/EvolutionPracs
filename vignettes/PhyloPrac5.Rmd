@@ -1,7 +1,7 @@
 ---
 title: "Evolution prac 5 — Tips and pitfalls"
 author: Dr James B Dorey and Dr Damien Esquerré, University of Wollongong
-date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2025-08-29"
+date: "Version `r format(Sys.time(), '%Y-%m-%d')`; practical 2026-08-28"
 output: 
    rmarkdown::html_document:
     toc: true
