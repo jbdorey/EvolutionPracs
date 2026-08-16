@@ -394,7 +394,7 @@ lengthCorrectionTable <- tibble::tibble(sequence = finchSpecies_fasta) %>%
 lengthCorrectionTable <- lengthCorrectionTable %>%
   dplyr::filter(!name %in% c("Camarhynchus_pallidus_pallidus_2864045949","Camarhynchus_pallidus_striatipecta_2864045941", "Camarhynchus_pallidus_productus_2864045969")  )
   
-# Now, we can turn this back into a fasta format... Asian don't worry too much about
+# Now, we can turn this back into a fasta format... Again, don't worry too much about
 # this code.
 equalisedFasta <- stringr::str_c(">",lengthCorrectionTable$name,"\n",
                                  lengthCorrectionTable$lengthenedSequence, 
