@@ -860,7 +860,7 @@ interested in seeing the quality of your reasoning and writing.
 expected to achieve a particular score for that component (total
 possible mark sums to fifteen)
 
-| **C.** | **2** | **1.25** | **0.5** | **0** |
+| **C.** | **2.5** | **1.25** | **0.5** | **0** |
 |----|----|----|----|----|
 | **1a** | The background is clear and succinct, bringing the reader from the broader topic to the specific gap and hypothesis professionally | The background is somewhat clear but inefficient, still brings the reader from the broader topic to the specific gap and hypothesis | The background if rambling and unclear, the topics discussed are of dubious relevance but guide the reader to the gap and hypothesis | The background is absent or completely irrelevant so that the reader is not at all prepared for the specific gap and hypothesis |
 | **2a** | NA | Student clearly and succinctly identifies a knowledge gap of strong relevance to their project and methods | Student identifies a knowledge gap of dubious relevance to their project and methods | Student does not identify and state a knowledge gap |
